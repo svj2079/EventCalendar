@@ -101,7 +101,12 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="submit" name="Save" value="ثبت">
+                        <input type="submit" name="Edit" value="ویرایش">
+                    </td>  
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" name="Delete" value="حذف">
                     </td>  
                 </tr>      
             </form>
