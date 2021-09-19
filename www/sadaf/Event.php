@@ -4,6 +4,16 @@
     
         <table class="table-sm table-borderd" style="direction: dir=ltr">
             <form action="" method="$_POST">
+            <tr>
+                    <td>
+                        <b>توضیح</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" name="Description" value="توضیح مختصر رویداد">
+                    </td>
+                </tr>
                 <tr>
                     <td>
                         <b>تاریخ شروع</b>
@@ -66,21 +76,6 @@
                 </tr>
                 <tr>
                     <td>
-                        <b>توضیح</b>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" name="Description" value="توضیح مختصر رویداد">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="submit" name="EventID" value="رویداد" location="localhost:href='EventType.php'">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
                         <b>سطح رویداد </b>
                     </td>
                 </tr>
@@ -101,9 +96,16 @@
                 </tr>
                 <tr>
                     <td>
+                        <input type="submit" name="EventID" value="رویداد" location="localhost:href='EventType.php'">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         <input type="submit" name="Save" value="ثبت">
                     </td>  
                 </tr>      
             </form>
         </table>
+    </body>
+</html>
  

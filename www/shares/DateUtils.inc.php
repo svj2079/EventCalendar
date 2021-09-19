@@ -99,6 +99,9 @@
 	      $sh[1]='0'.$sh[1];
 	   if ($sh[0]<10)
 	      $sh[0]='0'.$sh[0];
+		if ($sh[2] < 20)
+			return $sh[0].'/'.$sh[1].'/14'.$sh[2];
+		
 	   return $sh[0].'/'.$sh[1].'/13'.$sh[2];
 	       }
 	  };
@@ -107,10 +110,10 @@
 	   if($date==NULL)
 	     return '0000-00-00';
 	   else{
-	   $yy=substr($date,0,2);
-   	   $mm=substr($date,3,2);
-	   $dd=substr($date,6,2);
-	   $yy='13'.$yy;
+	   $yy=substr($date,0,4);
+   	   $mm=substr($date,5,2);
+	   $dd=substr($date,8,2);
+	   //$yy='13'.$yy;
 	   $xdate = ConvertS2XDate($dd,$mm,$yy);
 	   return $xdate;}
 	  };

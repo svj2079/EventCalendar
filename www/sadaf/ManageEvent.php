@@ -1,9 +1,55 @@
 <?php
     include "header.inc.php";
-    HTMLBegin(); ?>
+    include "classes/Event.class.php";
+    HTMLBegin();
+    $s="1 400-06-28";
+    $d=xdate($s);
+    $d = substr($d , 0 , 4)."-".substr($d , 4 , 2)."-".substr($d , 6 ,2);
+    echo $d;
+    manage_Event::Add("2021-09-09 10:05","2021-09-10 10:05","test","1","1","1");
+    manage_Event::Update(1,"2021-11-12 10:05", "2022-10-01 11:00","test1", 1 , 2 , 2);
+    die();
+
+   /* if(isset($_REQUEST["description"]))
+    {
+        if(isset($_REQUEST["id"]))
+            manage_EventTypes::Update($_REQUEST["id"], $_REQUEST["description"]);
+        else
+            manage_EventTypes::Add($_REQUEST["description"]);
+    }*/
+    if(isset($_REQUEST["id"]))
+    {
+        $obj = new be_Event();
+        $obj->LoadDataFromDatabase($_REQUEST["id"]);
+        $ShStartDate = $obj->ShStartDate;
+        $StartDate = $obj->StartDate;
+        $StartHour = $obj->StartHour;
+        $StartMinute = $obj->StartMinute;
+        $ShEndDate = $obj->ShEndDate;
+        $EndDate = $obj->EndDate;
+        $EndHour = $obj->EndHour;
+        $EndMinute = $obj->EndMinute;
+        $description = $obj->description;
+        $level = $obj->level;
+        $CreatorID = $obj->CreatorID;
+        $EventTypeID = $obj->EventTypeID;
+    }
+    else
+        $description = "";
+    ?>
     
         <table class="table-sm table-borderd" style="direction: dir=ltr">
             <form action="" method="$_POST">
+                <tr>
+                    <td>
+                        <b>توضیح</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" name="Description" value="توضیح مختصر رویداد">
+                    </td>
+                </tr>
                 <tr>
                     <td>
                         <b>تاریخ شروع</b>
@@ -66,21 +112,6 @@
                 </tr>
                 <tr>
                     <td>
-                        <b>توضیح</b>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" name="Description" value="توضیح مختصر رویداد">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="submit" name="EventID" value="رویداد" location="localhost:href='EventType.php'">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
                         <b>سطح رویداد </b>
                     </td>
                 </tr>
@@ -101,6 +132,11 @@
                 </tr>
                 <tr>
                     <td>
+                        <input type="submit" name="EventID" value="رویداد" location="localhost:href='EventType.php'">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         <input type="submit" name="Edit" value="ویرایش">
                     </td>  
                 </tr>
@@ -111,4 +147,6 @@
                 </tr>      
             </form>
         </table>
+    </body>
+</html>
  
