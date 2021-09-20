@@ -14,97 +14,97 @@
     if(isset($_REQUEST["ShStartDate"]))
     {
         if(isset($_REQUEST["id"]))
-            manage_Event::Update($_REQUEST["id"], $_REQUEST["ShStartDate"]);
+            manage_Event::Update($_REQUEST["id"], $_REQUEST["ShStartDate"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
         else
-            manage_Event::Add($_REQUEST["ShStartDate"]);
+            manage_Event::Add($_REQUEST["ShStartDate"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
     }
 
     if(isset($_REQUEST["StartDate"]))
     {
         if(isset($_REQUEST["id"]))
-            manage_Event::Update($_REQUEST["id"], $_REQUEST["StartDate"]);
+            manage_Event::Update($_REQUEST["id"], $_REQUEST["ShStartDate"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
         else
-            manage_Event::Add($_REQUEST["StartDate"]);
+            manage_Event::Add($_REQUEST["StartDate"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
     }
 
     if(isset($_REQUEST["StartHour"]))
     {
         if(isset($_REQUEST["id"]))
-            manage_Event::Update($_REQUEST["id"], $_REQUEST["StartHour"]);
+            manage_Event::Update($_REQUEST["id"], $_REQUEST["StartHour"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
         else
-            manage_Event::Add($_REQUEST["StartHour"]);
+            manage_Event::Add($_REQUEST["StartHour"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
     }
 
     if(isset($_REQUEST["StartMinute"]))
     {
         if(isset($_REQUEST["id"]))
-            manage_Event::Update($_REQUEST["id"], $_REQUEST["StartMinute"]);
+            manage_Event::Update($_REQUEST["id"], $_REQUEST["StartMinute"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
         else
-            manage_Event::Add($_REQUEST["StartMinute"]);
+            manage_Event::Add($_REQUEST["StartMinute"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
     }
 
     if(isset($_REQUEST["ShEndDate"]))
     {
         if(isset($_REQUEST["id"]))
-            manage_Event::Update($_REQUEST["id"], $_REQUEST["ShEndDate"]);
+            manage_Event::Update($_REQUEST["id"], $_REQUEST["ShEndDate"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
         else
-            manage_Event::Add($_REQUEST["ShEndDate"]);
+            manage_Event::Add($_REQUEST["ShEndDate"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
     }
 
     if(isset($_REQUEST["EndDate"]))
     {
         if(isset($_REQUEST["id"]))
-            manage_Event::Update($_REQUEST["id"], $_REQUEST["EndDate"]);
+            manage_Event::Update($_REQUEST["id"], $_REQUEST["EndDate"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
         else
-            manage_Event::Add($_REQUEST["EndDate"]);
+            manage_Event::Add($_REQUEST["EndDate"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
     }
 
     if(isset($_REQUEST["EndHour"]))
     {
         if(isset($_REQUEST["id"]))
-            manage_Event::Update($_REQUEST["id"], $_REQUEST["EndHour"]);
+            manage_Event::Update($_REQUEST["id"], $_REQUEST["EndHour"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
         else
-            manage_Event::Add($_REQUEST["EndHour"]);
+            manage_Event::Add($_REQUEST["EndHour"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
     }
 
     if(isset($_REQUEST["EndMinute"]))
     {
         if(isset($_REQUEST["id"]))
-            manage_Event::Update($_REQUEST["id"], $_REQUEST["EndMinute"]);
+            manage_Event::Update($_REQUEST["id"], $_REQUEST["EndMinute"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
         else
-            manage_Event::Add($_REQUEST["EndMinute"]);
+            manage_Event::Add($_REQUEST["EndMinute"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
     }
 
     if(isset($_REQUEST["description"]))
     {
         if(isset($_REQUEST["id"]))
-            manage_Event::Update($_REQUEST["id"], $_REQUEST["description"]);
+            manage_Event::Update($_REQUEST["id"], $_REQUEST["description"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
         else
-            manage_Event::Add($_REQUEST["description"]);
+            manage_Event::Add($_REQUEST["description"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
     }
 
     if(isset($_REQUEST["level"]))
     {
         if(isset($_REQUEST["id"]))
-            manage_Event::Update($_REQUEST["id"], $_REQUEST["level"]);
+            manage_Event::Update($_REQUEST["id"], $_REQUEST["level"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
         else
-            manage_Event::Add($_REQUEST["level"]);
+            manage_Event::Add($_REQUEST["level"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
     }
 
     if(isset($_REQUEST["CreatorID"]))
     {
         if(isset($_REQUEST["id"]))
-            manage_Event::Update($_REQUEST["id"], $_REQUEST["CreatorID"]);
+            manage_Event::Update($_REQUEST["id"], $_REQUEST["CreatorID"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
         else
-            manage_Event::Add($_REQUEST["CreatorID"]);
+            manage_Event::Add($_REQUEST["CreatorID"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
     }
 
     if(isset($_REQUEST["EventTypeID"]))
     {
         if(isset($_REQUEST["id"]))
-            manage_Event::Update($_REQUEST["id"], $_REQUEST["EventTypeID"]);
+            manage_Event::Update($_REQUEST["id"], $_REQUEST["EventTypeID"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
         else
-            manage_Event::Add($_REQUEST["EventTypeID"]);
+            manage_Event::Add($_REQUEST["EventTypeID"], $_REQUEST["ShEndDate"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["CreatorID"], $_REQUEST["EventTypeID"]);
     }
 
     if(isset($_REQUEST["id"]))

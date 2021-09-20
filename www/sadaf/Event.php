@@ -107,133 +107,14 @@
                     else
                     {
                         echo "<tr>";
+
                         echo "<td>";
                         echo "<input type=checkbox name='".$CheckBoxId."'>";
                         echo "</td>";
+                        
                         echo "<td>";
                         echo "<a href='ManageEvent.php?id=".$id."'>";
                         echo $res[$i]->ShStartDate;
-                        echo "</a>";
-                        echo "</td>";
-                        echo "</tr>";
-
-                        echo "<tr>";
-                        echo "<td>";
-                        echo "<input type=checkbox name='".$CheckBoxId."'>";
-                        echo "</td>";
-                        echo "<td>";
-                        echo "<a href='ManageEvent.php?id=".$id."'>";
-                        echo $res[$i]->StartDate;
-                        echo "</a>";
-                        echo "</td>";
-                        echo "</tr>";
-
-                        echo "<tr>";
-                        echo "<td>";
-                        echo "<input type=checkbox name='".$CheckBoxId."'>";
-                        echo "</td>";
-                        echo "<td>";
-                        echo "<a href='ManageEvent.php?id=".$id."'>";
-                        echo $res[$i]->StartHour;
-                        echo "</a>";
-                        echo "</td>";
-                        echo "</tr>";
-
-                        echo "<tr>";
-                        echo "<td>";
-                        echo "<input type=checkbox name='".$CheckBoxId."'>";
-                        echo "</td>";
-                        echo "<td>";
-                        echo "<a href='ManageEvent.php?id=".$id."'>";
-                        echo $res[$i]->StartMinute;
-                        echo "</a>";
-                        echo "</td>";
-                        echo "</tr>";
-
-                        echo "<tr>";
-                        echo "<td>";
-                        echo "<input type=checkbox name='".$CheckBoxId."'>";
-                        echo "</td>";
-                        echo "<td>";
-                        echo "<a href='ManageEvent.php?id=".$id."'>";
-                        echo $res[$i]->ShEndDate;
-                        echo "</a>";
-                        echo "</td>";
-                        echo "</tr>";
-
-                        echo "<tr>";
-                        echo "<td>";
-                        echo "<input type=checkbox name='".$CheckBoxId."'>";
-                        echo "</td>";
-                        echo "<td>";
-                        echo "<a href='ManageEvent.php?id=".$id."'>";
-                        echo $res[$i]->EndDate;
-                        echo "</a>";
-                        echo "</td>";
-                        echo "</tr>";
-
-                        echo "<tr>";
-                        echo "<td>";
-                        echo "<input type=checkbox name='".$CheckBoxId."'>";
-                        echo "</td>";
-                        echo "<td>";
-                        echo "<a href='ManageEvent.php?id=".$id."'>";
-                        echo $res[$i]->EndHour;
-                        echo "</a>";
-                        echo "</td>";
-                        echo "</tr>";
-
-                        echo "<tr>";
-                        echo "<td>";
-                        echo "<input type=checkbox name='".$CheckBoxId."'>";
-                        echo "</td>";
-                        echo "<td>";
-                        echo "<a href='ManageEvent.php?id=".$id."'>";
-                        echo $res[$i]->EndMinute;
-                        echo "</a>";
-                        echo "</td>";
-                        echo "</tr>";
-
-                        echo "<tr>";
-                        echo "<td>";
-                        echo "<input type=checkbox name='".$CheckBoxId."'>";
-                        echo "</td>";
-                        echo "<td>";
-                        echo "<a href='ManageEvent.php?id=".$id."'>";
-                        echo $res[$i]->description;
-                        echo "</a>";
-                        echo "</td>";
-                        echo "</tr>";
-
-                        echo "<tr>";
-                        echo "<td>";
-                        echo "<input type=checkbox name='".$CheckBoxId."'>";
-                        echo "</td>";
-                        echo "<td>";
-                        echo "<a href='ManageEvent.php?id=".$id."'>";
-                        echo $res[$i]->level;
-                        echo "</a>";
-                        echo "</td>";
-                        echo "</tr>";
-
-                        echo "<tr>";
-                        echo "<td>";
-                        echo "<input type=checkbox name='".$CheckBoxId."'>";
-                        echo "</td>";
-                        echo "<td>";
-                        echo "<a href='ManageEvent.php?id=".$id."'>";
-                        echo $res[$i]->CreatorID;
-                        echo "</a>";
-                        echo "</td>";
-                        echo "</tr>";
-
-                        echo "<tr>";
-                        echo "<td>";
-                        echo "<input type=checkbox name='".$CheckBoxId."'>";
-                        echo "</td>";
-                        echo "<td>";
-                        echo "<a href='ManageEvent.php?id=".$id."'>";
-                        echo $res[$i]->EventTypeID;
                         echo "</a>";
                         echo "</td>";
                         echo "</tr>";
@@ -249,6 +130,68 @@
 
         </table>      
     </form>
+
+
+
+
+
+
+
+    <form id=f1 name=f1 method=post>
+<table class="table table-sm table-stripped table-bordered">
+    <thead>
+        <td>&nbsp;</td>
+        <td>شرح</td>
+        <td>سطح اهمیت</td>
+        <td>نوع اطلاع رسانی</td>
+    </thead>
+    <?
+        $res = manage_EventTypes::GetList();
+        for($i=0; $i<count($res); $i++)
+        {
+            $id = $res[$i]->id;
+            $CheckBoxId = "ch_".$id;
+            if(isset($_POST[$CheckBoxId]))
+            {
+                manage_EventTypes::Remove($id);
+            }
+            else
+            {
+                echo "<tr>";
+
+                echo "<td>";
+                echo "<input type=checkbox name='".$CheckBoxId."'>";
+                echo "</td>";
+
+                echo "<td>";
+                echo "<a href='ManageEventTypes.php?id=".$id."'>";
+                echo $res[$i]->description;
+                echo "</a>";
+                echo "<a href='ManageEventTypes.php?id=".$id."'>";
+                echo $res[$i]->level;
+                echo "</a>";
+                echo "<a href='ManageEventTypes.php?id=".$id."'>";
+                echo $res[$i]->NotificationType;
+                echo "</a>";
+                echo "</td>";
+                echo "</tr>";
+            }
+        }
+    ?>
+    <tr class="FooterOfTable">
+        <td colspan=4 align="center">
+            <input type=button class="btn btn-danger" value="حذف" onclick="if(confirm('آیا مطمئن هستید')) document.f1.submit();">
+        </td>
+    </tr>
+</table>
+</form>
+
+
+
+
+
+
+
         
         </div>
     <div class="col-2"></div>
