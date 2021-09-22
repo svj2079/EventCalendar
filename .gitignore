@@ -2,6 +2,6 @@
 .idea/
 
 #config files
-www/.htaccess
+#www/.htaccess
 shares/MySql.config.php
 shares/config.class.php
