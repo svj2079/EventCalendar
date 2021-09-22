@@ -1,0 +1,10 @@
+php_value include_path  ".;c:\wamp64\www\EventCalendar\www\shares;c:\wamp64\www\EventCalendar\www\adodb;c:\wamp64\www\EventCalendar\vendor"
+php_value short_open_tag "On"
+php_value error_reporting "On"
+php_value display_errors "On"
+php_value default_charset   "utf-8"
+php_value session.save_handler  "files"
+php_value session.gc_maxlifetime  "1801"
+
+
+
