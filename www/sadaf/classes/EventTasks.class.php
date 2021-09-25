@@ -17,8 +17,9 @@
             {
                 $this->id=$rec["id"];
                 $this->description=$rec["description"];
-                $this->level["level"];
-                $this->NotificationType["NotificationType"];
+                $this->level=$rec["level"];
+                $this->NotificationType=$rec["NotificationType"];
+                $this->EventID=$rec["EventID"];
             }
         }
     }
@@ -26,12 +27,12 @@
 
     class manage_EventTasks
     {
-        static function Add($description, $level, $NotificationType)
+        static function Add($description, $level, $NotificationType , $EventID)
         {
             $mysql = pdodb::getInstance();
-            $query = "insert into EventCalendar.EventTasks (description, level, NotificationType) values (?, ?, ?)";
+            $query = "insert into EventCalendar.EventTasks (description, level, NotificationType, EventID) values (?, ?, ?, ?)";
             $mysql->Prepare($query);
-            $mysql->ExecuteStatement(array($description, $level, $NotificationType));
+            $mysql->ExecuteStatement(array($description, $level, $NotificationType, $EventID));
             return true;
 
         }
@@ -56,12 +57,12 @@
 
         }
 
-        static function GetList()
+        static function GetList($EventID)
         {
             $mysql = pdodb::getInstance();
-            $query = "select * from EventCalendar.EventTasks";
+            $query = "select * from EventCalendar.EventTasks where EventID=?";
             $mysql->Prepare($query);
-            $res = $mysql->ExecuteStatement(array());
+            $res = $mysql->ExecuteStatement(array($EventID));
             $k = 0;
             while($rec = $res->fetch())
             {
@@ -70,6 +71,7 @@
                 $ret[$k]->description=$rec["description"];
                 $ret[$k]->level=$rec["level"];
                 $ret[$k]->NotificationType=$rec["NotificationType"];
+                $ret[$k]->EventID=$rec["EventID"];
                 $k++;
     
             }

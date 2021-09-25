@@ -2,6 +2,7 @@
 
     include "header.inc.php";
     include "classes/EventTypes.class.php";
+    include "classes/EventTasks.class.php";
     HTMLBegin(); 
     if(isset($_REQUEST["description"]))
     {
@@ -10,20 +11,7 @@
         else
             manage_EventTasks::Add($_REQUEST["description"], $_REQUEST["level"], $_REQUEST["NotificationType"]);
     }
-    if(isset($_REQUEST["level"]))
-    {
-        if(isset($_REQUEST["id"]))
-            manage_EventTasks::Update($_REQUEST["id"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["NotificationType"]);
-        else
-            manage_EventTasks::Add($_REQUEST["description"], $_REQUEST["level"], $_REQUEST["NotificationType"]);
-    }
-    if(isset($_REQUEST["NotificationType"]))
-    {
-        if(isset($_REQUEST["id"]))
-            manage_EventTasks::Update($_REQUEST["id"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["NotificationType"]);
-        else
-            manage_EventTasks::Add($_REQUEST["description"], $_REQUEST["level"], $_REQUEST["NotificationType"]);
-    }
+   
     if(isset($_REQUEST["id"]))
     {
         $obj = new be_EventTask();
@@ -33,8 +21,11 @@
         $NotificationType = $obj->NotificationType;
     }
     else
+    {
         $description = "";
-
+        $level = "";
+        $NotificationType = "";
+    }
 ?>
 
 <div class="container-fluid">
@@ -43,6 +34,7 @@
 <div class="col-8" >
 
 <form id=f2 name=f2 method="post">
+    <input type=hidden id=id name=id value='<? echo $_REQUEST["EventID"]?>'>
     <?
         if(isset($_REQUEST["id"]))
             echo "<input type=hidden id=id name=id value='".$_REQUEST["id"]."'>";
@@ -89,6 +81,7 @@
 
 
 <form id=f1 name=f1 method=post>
+<input type=hidden id=id name=id value='<? echo $_REQUEST["EventID"]?>'>
 <table class="table table-sm table-stripped table-bordered">
     <thead>
         <td>&nbsp;</td>
@@ -97,14 +90,14 @@
         <td>نوع اطلاع رسانی</td>
     </thead>
     <?
-        $res = manage_EventTypes::GetList();
+        $res = manage_EventTasks::GetList($_REQUEST["EventID"]);
         for($i=0; $i<count($res); $i++)
         {
             $id = $res[$i]->id;
             $CheckBoxId = "ch_".$id;
             if(isset($_POST[$CheckBoxId]))
             {
-                manage_EventTypes::Remove($id);
+                manage_EventTasks::Remove($id);
             }
             else
             {
@@ -118,12 +111,10 @@
                 echo "<a href='ManageEventTypes.php?id=".$id."'>";
                 echo $res[$i]->description;
                 echo "</a>";
-                echo "<a href='ManageEventTypes.php?id=".$id."'>";
+                echo "<td>";
                 echo $res[$i]->level;
-                echo "</a>";
-                echo "<a href='ManageEventTypes.php?id=".$id."'>";
+                echo "</td><td>";
                 echo $res[$i]->NotificationType;
-                echo "</a>";
                 echo "</td>";
                 echo "</tr>";
             }

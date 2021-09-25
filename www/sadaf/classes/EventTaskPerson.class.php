@@ -4,7 +4,7 @@
     {
         public $id;
         public $EventTaskID;
-        public $CreatorID;
+        public $PersonID;
 
         function LoadDataFromDatabase($RecID)
         {
@@ -16,29 +16,19 @@
             {
                 $this->id=$rec["id"];
                 $this->EventTaskID=$rec["EventTaskID"];
-                $this->CreatorID=$rec["CreatorID"];
+                $this->PersonID=$rec["PersonID"];
             }
         }
     }
 
     class manage_EventTaskPerson
     {
-        static function Add($EventTaskID, $CreatorID)
+        static function Add($EventTaskID, $PersonID)
         {
             $mysql = pdodb::getInstance();
-            $query = "insert into EventCalendar.EventTaskPerson (EventTaskID, CreatorID) values (?, ?)";
+            $query = "insert into EventCalendar.EventTaskPerson (EventTaskID, PersonID) values (?, ?)";
             $mysql->Prepare($query);
-            $mysql->ExecuteStatement(array($description));
-            return true;
-
-        }
-
-        static function Update($id, $EventTaskID, $CreatorID)
-        {
-            $mysql = pdodb::getInstance();
-            $query = "update EventCalendar.EventTaskPerson set EventTaskID=?, CreatorID=? where id=?";
-            $mysql->Prepare($query);
-            $mysql->ExecuteStatement(array($EventTaskID,  $CreatorID, $id));
+            $mysql->ExecuteStatement(array($EventTaskID, $PersonID));
             return true;
 
         }
@@ -65,7 +55,7 @@
                 $ret[$k] = new be_EventType();
                 $ret[$k]->id=$rec["id"];
                 $ret[$k]->EventTaskID=$rec["EventTaskID"];
-                $ret[$k]->CreatorID=$rec["CreatorID"];
+                $ret[$k]->PersonID=$rec["PersonID"];
                 $k++;
     
             }

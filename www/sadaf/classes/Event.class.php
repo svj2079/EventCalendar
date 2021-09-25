@@ -30,18 +30,18 @@
             if($rec=$res->fetch())
             {
                 $this->id=$rec["id"];
-                $this->ShStartDate["ShStartDate"];
-                $this->StartDate["StartDate"];
-                $this->StartHour["StartHour"];
-                $this->StartMinute["StartMinute"];
-                $this->ShEtartDate["ShEtartDate"];
-                $this->EndDate["EndDate"];
-                $this->EndHour["EndHour"];
-                $this->EndMinute["EndMinute"];
+                $this->ShStartDate=$rec["ShStartDate"];
+                $this->StartDate=$rec["StartDate"];
+                $this->StartHour=$rec["StartHour"];
+                $this->StartMinute=$rec["StartMinute"];
+                $this->ShEndDate=$rec["ShEndDate"];
+                $this->EndDate=$rec["EndDate"];
+                $this->EndHour=$rec["EndHour"];
+                $this->EndMinute=$rec["EndMinute"];
                 $this->description=$rec["description"];
-                $this->level["level"];
-                $this->CreatorID["CreatorID"];
-                $this->EventTypeID["EventTypeID"];
+                $this->level=$rec["level"];
+                $this->CreatorID=$rec["CreatorID"];
+                $this->EventTypeID=$rec["EventTypeID"];
             }
         }
     }
@@ -77,8 +77,9 @@
 
         static function GetList()
         {
+            
             $mysql = pdodb::getInstance();
-            $query = "select * from EventCalendar.events";
+            $query = "select *,sadaf.g2j(StartTime) as ShStartDate, sadaf.g2j(EndTime) as ShEndDate from EventCalendar.events";
             $mysql->Prepare($query);
             $res = $mysql->ExecuteStatement(array());
             $k = 0;

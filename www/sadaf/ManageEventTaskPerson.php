@@ -1,33 +1,25 @@
 <?php
-     include "header.inc.php";
-     include "classes/EventTypes.class.php";
-     HTMLBegin(); 
-     if(isset($_REQUEST["EventTaskID"]))
-     {
-         if(isset($_REQUEST["id"]))
-             manage_EventTaskPerson::Update($_REQUEST["id"], $_REQUEST["EventTaskID"], $_REQUEST["CreatorID"]);
-         else
-             manage_EventTaskPerson::Add($_REQUEST["EventTaskID"], $_REQUEST["Creator"]);
-     }
-     if(isset($_REQUEST["CreatorID"]))
-     {
-         if(isset($_REQUEST["id"]))
-             manage_EventTaskPerson::Update($_REQUEST["id"], $_REQUEST["EventTaskID"], $_REQUEST["CreatorID"]);
-         else
-             manage_EventTaskPerson::Add($_REQUEST["EventTaskID"], $_REQUEST["Creator"]);
-     }
-     if(isset($_REQUEST["id"]))
-     {
-         $obj = new be_EventType();
-         $obj->LoadDataFromDatabase($_REQUEST["id"]);
-         $EventTaskID = $obj->EventTaskID;
-         $CreatorID = $obj->CreatorID;
-     }
-     else
-         $description = "";
-
-
-?>
+    include "header.inc.php";
+    include "classes/EventTaskPerson.class.php";
+    HTMLBegin(); 
+    if(isset($_REQUEST["PersonID"]))
+    {
+        if(isset($_REQUEST["id"]))
+            manage_EventTaskPerson::Update($_REQUEST["id"], $_REQUEST["EventTaskID"],$_REQUEST["PersonID"]);
+        else
+            manage_EventTaskPerson::Add($_REQUEST["EventTaskID"],$_REQUEST["PersonID"]);
+    }
+    if(isset($_REQUEST["id"]))
+    {
+        $obj = new be_EventTaskPerson();
+        $obj->LoadDataFromDatabase($_REQUEST["id"]);
+        $PersonID = $obj->PersonID;
+    }
+    else
+    {
+        $PersonID = "";
+    }
+    ?>
 
 <div class="container-fluid">
 <div class="row">
@@ -36,39 +28,27 @@
 
 <form id=f2 name=f2 method="post">
     <?
-        if(isset($_REQUEST["id"]))
-            echo "<input type=hidden id=id name=id value='".$_REQUEST["id"]."'>";
+        echo "<input type=hidden id=EventTaskID name=EventTaskID value='".$_REQUEST["EventTaskID"]."'>";
     ?>
     <table class="table table-sm table-stripped table-bordered">
     <tr class="HeaderOfTable">
-    <td align="center">ایجاد/ویرایش دسترسی افراد رویداد</td>
+    <td align="center">ایجاد/ویرایش دسترسی شخص </td>
     </tr>
     <tr>
     <td>
     <table width="100%" border="0">
     <tr>
         <td width="1%" nowrap>
-    کد فعالیت های رویداد
+    کد دسترسی شخص
         </td>
         <td nowrap>
-        <input class="form-control sadaf-m-input" type="number" name="EventTaskID" id="EventTaskID" maxlength="45" value="<? echo $EventTaskID ?>">
-        </td>
-    </tr>
-    <tr>
-    <td>
-    <table width="100%" border="0">
-    <tr>
-        <td width="1%" nowrap>
-    کد شخص  
-        </td>
-        <td nowrap>
-        <input class="form-control sadaf-m-input" type="number" name="CreatorID" id="CreatorID" maxlength="45" value="<? echo $CreatorID ?>">
+        <input class="form-control sadaf-m-input" type="text" name="PersonID" id="PersonID" maxlength="45" value="<? echo $PersonID ?>">
         </td>
     </tr>
     <tr class="FooterOfTable">
     <td align="center" colspan="2">
         <input type="button" class="btn btn-info" onclick="javascript: ValidateForm();" value="ذخیره">
-        <input type="button" class="btn " onclick="javascript: document.location='ManageEventTypes.php';" value="جدید">
+        <input type="button" class="btn " onclick="javascript: document.location='ManageEventTaskPerson.php';" value="جدید">
     </td>
     </tr>
     </table>
@@ -79,8 +59,7 @@
 <table class="table table-sm table-stripped table-bordered">
     <thead>
         <td>&nbsp;</td>
-        <td>کد فعالیت های رویداد</td>
-        <td>کد شخص</td>
+        <td>کد دسترسی</td>
     </thead>
     <?
         $res = manage_EventTaskPerson::GetList();
@@ -101,14 +80,7 @@
                 echo "</td>";
 
                 echo "<td>";
-                echo "<a href='ManageEventTaskPerson.php?id=".$id."'>";
-                echo $res[$i]->EventTaskID;
-                echo "</a>";
-                echo "</td>";
-                echo "<td>";
-                echo "<a href='ManageEventTaskPerson.php?id=".$id."'>";
-                echo $res[$i]->CreatorID;
-                echo "</a>";
+                echo $res[$i]->PersonID;
                 echo "</td>";
                 echo "</tr>";
             }
@@ -121,8 +93,8 @@
     </tr>
 </table>
 </form>
-
-</div>
+    
+    </div>
     <div class="col-2"></div>
 </div>
 </div>
