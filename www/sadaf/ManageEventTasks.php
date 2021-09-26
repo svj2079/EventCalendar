@@ -3,13 +3,15 @@
     include "header.inc.php";
     include "classes/EventTypes.class.php";
     include "classes/EventTasks.class.php";
+    
     HTMLBegin(); 
+    
     if(isset($_REQUEST["description"]))
     {
         if(isset($_REQUEST["id"]))
             manage_EventTasks::Update($_REQUEST["id"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["NotificationType"]);
         else
-            manage_EventTasks::Add($_REQUEST["description"], $_REQUEST["level"], $_REQUEST["NotificationType"]);
+            manage_EventTasks::Add($_REQUEST["description"], $_REQUEST["level"], $_REQUEST["NotificationType"] , $_REQUEST["EventID"]);
     }
    
     if(isset($_REQUEST["id"]))
@@ -34,7 +36,7 @@
 <div class="col-8" >
 
 <form id=f2 name=f2 method="post">
-    <input type=hidden id=id name=id value='<? echo $_REQUEST["EventID"]?>'>
+    <input type=hidden id=EventID name=EventID value='<? echo $_REQUEST["EventID"]?>'>          
     <?
         if(isset($_REQUEST["id"]))
             echo "<input type=hidden id=id name=id value='".$_REQUEST["id"]."'>";
@@ -67,13 +69,18 @@
     نوع اطلاع رسانی
         </td>
         <td nowrap>
-        <input class="form-control sadaf-m-input" type="text" name="NotificationType" id="NotificationType" maxlength="45" value="<? echo $NotificationType ?>">
+              <select name="NotificationType" id="NotificationType">
+                <option id="NONE">None</option>
+                <option <? if($NotificationType =="EMAIL") echo"selected" ?> id="EMAIL">Email</option>
+                <option <? if($NotificationType =="SMS") echo"selected" ?> id="SMS">SMS</option>
+                <option <? if($NotificationType =="PORTAL") echo"selected" ?> id="PORTAL">Portal</option>
+              </select>
         </td>
     </tr>
     <tr class="FooterOfTable">
     <td align="center" colspan="2">
         <input type="button" class="btn btn-info" onclick="javascript: ValidateForm();" value="ذخیره">
-        <input type="button" class="btn " onclick="javascript: document.location='ManageEventTypes.php';" value="جدید">
+        <input type="button" class="btn " onclick="javascript: document.location='ManageEventTasks.php?EventID=<? echo $_REQUEST['EventID']?>';" value="جدید">
     </td>
     </tr>
     </table>
@@ -81,7 +88,7 @@
 
 
 <form id=f1 name=f1 method=post>
-<input type=hidden id=id name=id value='<? echo $_REQUEST["EventID"]?>'>
+<input type=hidden id=EventID name=EventID value='<? echo $_REQUEST["EventID"]?>'>
 <table class="table table-sm table-stripped table-bordered">
     <thead>
         <td>&nbsp;</td>
@@ -108,7 +115,7 @@
                 echo "</td>";
 
                 echo "<td>";
-                echo "<a href='ManageEventTypes.php?id=".$id."'>";
+                echo "<a href='ManageEventTasks.php?id=".$id."&EventID=".$_REQUEST['EventID']."'>";
                 echo $res[$i]->description;
                 echo "</a>";
                 echo "<td>";
@@ -116,6 +123,11 @@
                 echo "</td><td>";
                 echo $res[$i]->NotificationType;
                 echo "</td>";
+                echo "<td>";
+                echo "<a href='ManageEventTasksperson.php?id=".$id."'>";
+                echo $res[$i]->EventTaskPerson;
+                echo "</a>";
+                echo "<td>";
                 echo "</tr>";
             }
         }

@@ -2,12 +2,13 @@
     include "header.inc.php";
     include "classes/EventTaskPerson.class.php";
     HTMLBegin(); 
+    $EventTaskID=$_REQUEST["EventTaskID"];
     if(isset($_REQUEST["PersonID"]))
     {
         if(isset($_REQUEST["id"]))
-            manage_EventTaskPerson::Update($_REQUEST["id"], $_REQUEST["EventTaskID"],$_REQUEST["PersonID"]);
+            manage_EventTaskPerson::Update($_REQUEST["id"], $EventTaskID,$_REQUEST["PersonID"]);
         else
-            manage_EventTaskPerson::Add($_REQUEST["EventTaskID"],$_REQUEST["PersonID"]);
+            manage_EventTaskPerson::Add($EventTaskID,$_REQUEST["PersonID"]);
     }
     if(isset($_REQUEST["id"]))
     {
@@ -27,12 +28,11 @@
 <div class="col-8" >
 
 <form id=f2 name=f2 method="post">
-    <?
-        echo "<input type=hidden id=EventTaskID name=EventTaskID value='".$_REQUEST["EventTaskID"]."'>";
-    ?>
+    <input type=hidden id=EventTaskID name=EventTaskID value='<? echo $EventTaskID?>'>
+    
     <table class="table table-sm table-stripped table-bordered">
     <tr class="HeaderOfTable">
-    <td align="center">ایجاد/ویرایش دسترسی شخص </td>
+    <td align="center">ایجاد دسترسی شخص </td>
     </tr>
     <tr>
     <td>
@@ -48,7 +48,7 @@
     <tr class="FooterOfTable">
     <td align="center" colspan="2">
         <input type="button" class="btn btn-info" onclick="javascript: ValidateForm();" value="ذخیره">
-        <input type="button" class="btn " onclick="javascript: document.location='ManageEventTaskPerson.php';" value="جدید">
+        <input type="button" class="btn " onclick="javascript: document.location='ManageEventTaskPerson.php?EventTaskID=<? echo $EventTaskID?>';" value="جدید">
     </td>
     </tr>
     </table>
@@ -56,13 +56,14 @@
 
 
 <form id=f1 name=f1 method=post>
+<input type=hidden id=EventTaskID name=EventTaskID value='<? echo $_REQUEST["EventTaskID"]?>'>
 <table class="table table-sm table-stripped table-bordered">
     <thead>
         <td>&nbsp;</td>
         <td>کد دسترسی</td>
     </thead>
     <?
-        $res = manage_EventTaskPerson::GetList();
+        $res = manage_EventTaskPerson::GetList($EventTaskID);
         for($i=0; $i<count($res); $i++)
         {
             $id = $res[$i]->id;

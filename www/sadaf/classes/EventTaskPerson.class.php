@@ -43,12 +43,12 @@
 
         }
 
-        static function GetList()
+        static function GetList($EventTaskID)
         {
             $mysql = pdodb::getInstance();
-            $query = "select * from EventCalendar.EventTaskPerson";
+            $query = "select * from EventCalendar.EventTaskPerson where EventTaskID=?";
             $mysql->Prepare($query);
-            $res = $mysql->ExecuteStatement(array());
+            $res = $mysql->ExecuteStatement(array($EventTaskID));
             $k = 0;
             while($rec = $res->fetch())
             {

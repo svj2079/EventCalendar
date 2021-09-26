@@ -1,6 +1,7 @@
 <?php
     include "header.inc.php";
     include "classes\Event.class.php";
+    include "classes/EventTaskPerson.class.php";
     HTMLBegin();
     ?>
     
@@ -49,7 +50,7 @@
                         echo "</a>";
                         echo "</td>";
                         echo "<td>";
-                        echo "<a href='ManageEvent.php?id=".$id."'>";
+                        echo "<a href='ManageEvent.php?=".$id."'>";
                         echo "مدیران";
                         echo "</a>";
                         echo "</td>";
