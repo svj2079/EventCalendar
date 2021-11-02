@@ -95,3 +95,8 @@ CREATE TABLE `eventtypes` (
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2021-09-22 11:36:21
+
+INSERT INTO `eventtypes` VALUES (49, 'آموزشی');
+INSERT INTO `eventtypes` VALUES (50, 'پژوهشی');
+INSERT INTO `eventtypes` VALUES (51, 'فرهنگی');
+INSERT INTO `eventtypes` VALUES (52, 'هنری');
