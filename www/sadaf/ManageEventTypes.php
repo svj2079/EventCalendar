@@ -2,6 +2,7 @@
     include "header.inc.php";
     include "classes/EventTypes.class.php";
     HTMLBegin(); 
+    
     if(isset($_REQUEST["description"]))
     {
         if(isset($_REQUEST["id"]))

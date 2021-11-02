@@ -2,6 +2,7 @@
     include "header.inc.php";
     include "classes/EventAccess.class.php";
     HTMLBegin(); 
+    
     if(isset($_REQUEST["CreatorID"]))
     {
         if(isset($_REQUEST["id"]))

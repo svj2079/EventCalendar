@@ -2,16 +2,18 @@
     include "header.inc.php";
     include "classes/Event.class.php";
     include "classes/EventTypes.class.php";
+    include "classes/EventAccess.class.php";
     HTMLBegin();
 
     
 
-    if(isset($_REQUEST["StartDate"]))
+    if(isset($_REQUEST["StartTime"]))
     {
-        $s=xdate($_REQUEST["StartDate"]);
+        
+        $s=xdate($_REQUEST["StartTime"]);
         $s= substr($s , 0 , 4)."-".substr($s , 4 , 2)."-".substr($s , 6 ,2)." ".$_REQUEST["StartHour"].":".$_REQUEST["StartMinute"];
 
-        $e=xdate($_REQUEST["EndDate"]);
+        $e=xdate($_REQUEST["EndTime"]);
         $e= substr($e , 0 , 4)."-".substr($e , 4 , 2)."-".substr($e , 6 ,2)." ".$_REQUEST["EndHour"].":".$_REQUEST["EndMinute"];
 
         if(isset($_REQUEST["id"]))
@@ -125,7 +127,12 @@
                     <b>سطح اهمیت رویداد</b>
                 </td>
                 <td nowrap>
-                    <input class="form-control sadaf-m-input" type="number" name="level" id="level" maxlength="45" value="<? echo $level ?>">
+                    <select name="level" id="level">
+                        <option <? if($level =="1") echo"selected" ?> id="1">1</option>
+                        <option <? if($level =="2") echo"selected" ?> id="2">2</option>
+                        <option <? if($level =="3") echo"selected" ?> id="3">3</option>
+                        <option <? if($level =="4") echo"selected" ?> id="4">4</option>
+                    </select>
                 </td>
             </tr>
             <tr class="FooterOfTable">

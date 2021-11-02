@@ -61,7 +61,12 @@
     سطح اهمیت
         </td>
         <td nowrap>
-        <input class="form-control sadaf-m-input" type="number" name="level" id="level" maxlength="45" value="<? echo $level ?>">
+            <select name="level" id="level">
+                <option <? if($level =="1") echo"selected" ?> id="1">1</option>
+                <option <? if($level =="2") echo"selected" ?> id="2">2</option>
+                <option <? if($level =="3") echo"selected" ?> id="3">3</option>
+                <option <? if($level =="4") echo"selected" ?> id="4">4</option>
+            </select>
         </td>
     </tr>
     <tr>

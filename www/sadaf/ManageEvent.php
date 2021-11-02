@@ -1,7 +1,8 @@
 <?php
     include "header.inc.php";
     include "classes\Event.class.php";
-    include "classes/EventTaskPerson.class.php";
+   
+    //include "classes\EventTaskPerson.class.php";
     HTMLBegin();
     ?>
     
@@ -28,6 +29,7 @@
                     }
                     else
                     {
+                        
                         echo "<tr>";
 
                         echo "<td>";
