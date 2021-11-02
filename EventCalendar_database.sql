@@ -49,6 +49,7 @@ DROP TABLE IF EXISTS `eventtasks`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `eventtasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `EventID` int(11) DEFAULT NULL,
   `description` varchar(45) COLLATE utf8_persian_ci DEFAULT NULL,
   `level` int(11) DEFAULT NULL,
   `NotificationType` varchar(45) COLLATE utf8_persian_ci DEFAULT NULL,
