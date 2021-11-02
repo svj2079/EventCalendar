@@ -49,6 +49,7 @@ DROP TABLE IF EXISTS `eventtasks`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `eventtasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `EventID` int(11) DEFAULT NULL,
   `description` varchar(45) COLLATE utf8_persian_ci DEFAULT NULL,
   `level` int(11) DEFAULT NULL,
   `NotificationType` varchar(45) COLLATE utf8_persian_ci DEFAULT NULL,
@@ -94,3 +95,8 @@ CREATE TABLE `eventtypes` (
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2021-09-22 11:36:21
+
+INSERT INTO `eventtypes` VALUES (49, 'آموزشی');
+INSERT INTO `eventtypes` VALUES (50, 'پژوهشی');
+INSERT INTO `eventtypes` VALUES (51, 'فرهنگی');
+INSERT INTO `eventtypes` VALUES (52, 'هنری');
