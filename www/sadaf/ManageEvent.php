@@ -52,7 +52,7 @@
                         echo "</a>";
                         echo "</td>";
                         echo "<td>";
-                        echo "<a href='ManageEvent.php?=".$id."'>";
+                        echo "<a href='ManageEventAccess.php?=".$id."'>";
                         echo "مدیران";
                         echo "</a>";
                         echo "</td>";

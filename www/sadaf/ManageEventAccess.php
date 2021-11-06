@@ -3,38 +3,24 @@
     include "classes/EventAccess.class.php";
     HTMLBegin(); 
     
-    if(isset($_REQUEST["CreatorID"]))
+    if(isset($_REQUEST["PersonID"]))
     {
         if(isset($_REQUEST["id"]))
-            manage_EventTypes::Update($_REQUEST["id"], $_REQUEST["CreatorID"], $_REQUEST["AccessType"], $_REQUEST["EventID"]);
+            manage_EventTypes::Update($_REQUEST["id"], $_REQUEST["PersonID"], $_REQUEST["AccessType"], $_REQUEST["EventID"]);
         else
-            manage_EventTypes::Add($_REQUEST["CreatorID"], $_REQUEST["AccessType"], $_REQUEST["EventID"]);
-    }
-    if(isset($_REQUEST["AccessType"]))
-    {
-        if(isset($_REQUEST["id"]))
-            manage_EventTypes::Update($_REQUEST["id"], $_REQUEST["CreatorID"], $_REQUEST["AccessType"], $_REQUEST["EventID"]);
-        else
-            manage_EventTypes::Add($_REQUEST["CreatorID"], $_REQUEST["AccessType"], $_REQUEST["EventID"]);
-    }
-    if(isset($_REQUEST["EventID"]))
-    {
-        if(isset($_REQUEST["id"]))
-            manage_EventTypes::Update($_REQUEST["id"], $_REQUEST["CreatorID"], $_REQUEST["AccessType"], $_REQUEST["EventID"]);
-        else
-            manage_EventTypes::Add($_REQUEST["CreatorID"], $_REQUEST["AccessType"], $_REQUEST["EventID"]);
+            manage_EventTypes::Add($_REQUEST["PersonID"], $_REQUEST["AccessType"], $_REQUEST["EventID"]);
     }
     if(isset($_REQUEST["id"]))
     {
         $obj = new be_EventAccess();
         $obj->LoadDataFromDatabase($_REQUEST["id"]);
-        $CreatorID = $obj->CreatorID;
+        $PersonID = $obj->PersonID;
         $AccessType = $obj->AccessType;
         $EventID = $obj->EventID;
     }
     else
     {
-        $CreatorID = "";
+        $PersonID = "";
         $AccessType = "";
         $EventID = "";
     }
@@ -42,8 +28,8 @@
 
 <div class="container-fluid">
 <div class="row">
-<div class="col-2" ></div>
-<div class="col-8" >
+<div class="col-2"></div>
+<div class="col-8">
 
 <form id=f2 name=f2 method="post">
     <?
@@ -62,19 +48,11 @@
     نوع دسترسی
         </td>
         <td nowrap>
-        <input class="form-control sadaf-m-input" type="text" name="AccessType" id="AccessType" maxlength="45" value="<? echo $AccessType ?>">
-        </td>
-        <td width="1%" nowrap>
-    کد شخص 
-        </td>
-        <td nowrap>
-        <input class="form-control sadaf-m-input" type="number" name="CreatorID" id="CreatorID" maxlength="45" value="<? echo $CreatorID ?>">
-        </td>
-        <td width="1%" nowrap>
-    کد رویداد 
-        </td>
-        <td nowrap>
-        <input class="form-control sadaf-m-input" type="number" name="EventID" id="EventID" maxlength="45" value="<? echo $EventID ?>">
+              <select name="AccessType" id="AccessType">
+                <option id="NONE">None</option>
+                <option <? if($AccessType =="Write") echo"selected" ?> id="Write">Write</option>
+                <option <? if($AccessType =="Read") echo"selected" ?> id="Read">Read</option>
+              </select>
         </td>
     </tr>
     <tr class="FooterOfTable">
@@ -118,7 +96,7 @@
                 echo "</td>";
                 echo "<td>";
                 echo "<a href='ManageEventTypes.php?id=".$id."'>";
-                echo $res[$i]->CreatorID;
+                echo $res[$i]->PersonID;
                 echo "</a>";
                 echo "</td>";
                 echo "<td>";

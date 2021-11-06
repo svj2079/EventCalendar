@@ -3,7 +3,7 @@
     class be_EventAccess
     {
         public $id;
-        public $CreatorID;
+        public $PersonID;
         public $AccessType;
         public $EventID;
 
@@ -16,7 +16,7 @@
             if($rec=$res->fetch())
             {
                 $this->id=$rec["id"];
-                $this->CreatorID=$rec["CreatorID"];
+                $this->CreatorID=$rec["PersonID"];
                 $this->AccessType=$rec["AccessType"];
                 $this->EventID=$rec["EventID"];
             }
@@ -27,22 +27,22 @@
 
     class manage_EventAccess
     {
-        static function Add($CreatorID, $AccessType, $EventID)
+        static function Add($PersonID, $AccessType, $EventID)
         {
             $mysql = pdodb::getInstance();
-            $query = "insert into EventCalendar.EventAccess (CreatorID, AccessType, EventID) values (?, ?, ?)";
+            $query = "insert into EventCalendar.EventAccess (PersonID, AccessType, EventID) values (?, ?, ?)";
             $mysql->Prepare($query);
-            $mysql->ExecuteStatement(array($CreatorID, $AccessType, $EventID));
+            $mysql->ExecuteStatement(array($PersonID, $AccessType, $EventID));
             return true;
 
         }
 
-        static function Update($id, $CreatorID, $AccessType, $EventID)
+        static function Update($id, $PersonID, $AccessType, $EventID)
         {
             $mysql = pdodb::getInstance();
-            $query = "update EventCalendar.EventAccess set CreatorID=?, AccessType=?, EventID=? where id=?";
+            $query = "update EventCalendar.EventAccess set PersonID=?, AccessType=?, EventID=? where id=?";
             $mysql->Prepare($query);
-            $mysql->ExecuteStatement(array($CreatorID, $AccessType, $EventID, $id));
+            $mysql->ExecuteStatement(array($PersonID, $AccessType, $EventID, $id));
             return true; 
 
         }
@@ -68,7 +68,7 @@
             {
                 $ret[$k] = new be_EventAccess();
                 $ret[$k]->id=$rec["id"];
-                $ret[$k]->CreatorID=$rec["CreatorID"];
+                $ret[$k]->PersonID=$rec["PersonID"];
                 $ret[$k]->AccessType=$rec["AccessType"];
                 $ret[$k]->EventID=$ret["EventID"];
                 $k++;
