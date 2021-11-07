@@ -16,7 +16,7 @@
             if($rec=$res->fetch())
             {
                 $this->id=$rec["id"];
-                $this->CreatorID=$rec["PersonID"];
+                $this->PersonID=$rec["PersonID"];
                 $this->AccessType=$rec["AccessType"];
                 $this->EventID=$rec["EventID"];
             }

@@ -14,7 +14,7 @@
     <form id=f1 name=f1 method=post>
         <table class="table table-sm table-stripped table-bordered">
             <tr class="HeaderOfTable">
-                <td align="center" colspan="6">رویدادها</td>
+                <td align="center" colspan="7">رویدادها</td>
             </tr>
 
             <?
@@ -57,6 +57,11 @@
                         echo "</a>";
                         echo "</td>";
                         echo "<td>";
+                        echo "<a href='ManageEventTaskPerson.php?=".$id."'>";
+                        echo "مجریان";
+                        echo "</a>";
+                        echo "</td>";
+                        echo "<td>";
                         echo "<a href='ManageEventTasks.php?EventID=".$id."'>";
                         echo "چک لیست";
                         echo "</a>";
@@ -66,7 +71,7 @@
                 }
             ?>
     <tr class="FooterOfTable">
-        <td colspan=6 align="center">
+        <td colspan=7 align="center">
             <input type=button class="btn btn-danger" value="حذف" onclick="if(confirm('آیا مطمئن هستید')) document.f1.submit();">
         </td>
     </tr>

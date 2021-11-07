@@ -2,7 +2,9 @@
     include "header.inc.php";
     include "classes/EventTaskPerson.class.php";
     HTMLBegin(); 
+
     $EventTaskID=$_REQUEST["EventTaskID"];
+    
     if(isset($_REQUEST["PersonID"]))
     {
         if(isset($_REQUEST["id"]))
@@ -39,10 +41,14 @@
     <table width="100%" border="0">
     <tr>
         <td width="1%" nowrap>
-    کد دسترسی شخص
+    نام و نام خانوادگی
         </td>
         <td nowrap>
-        <input class="form-control sadaf-m-input" type="text" name="PersonID" id="PersonID" maxlength="45" value="<? echo $PersonID ?>">
+              <select name="PersonID" id="PersonID">
+                <option id="NONE">None</option>
+                <option <? if($PersonID =="1") echo"selected" ?> id="1">?!</option>
+                <option <? if($PersonID =="2") echo"selected" ?> id="2">?!!</option>
+              </select>
         </td>
     </tr>
     <tr class="FooterOfTable">
@@ -60,7 +66,7 @@
 <table class="table table-sm table-stripped table-bordered">
     <thead>
         <td>&nbsp;</td>
-        <td>کد دسترسی</td>
+        <td>نام و نام خانوادگی</td>
     </thead>
     <?
         $res = manage_EventTaskPerson::GetList($EventTaskID);
