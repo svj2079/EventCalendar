@@ -1,27 +1,27 @@
 <?php
     include "header.inc.php";
-    include "classes/EventUnits.class.php";
+    include "classes/EventSubUnits.class.php";
     HTMLBegin(); 
 
-    if(isset($_REQUEST["FacCode"]))
+    if(isset($_REQUEST["EduGroupCode"]))
     {
         if(isset($_REQUEST["id"]))
-            manage_EventTypes::Update($_REQUEST["id"], $_REQUEST["EventID"], $_REQUEST["FacCode"]);
+            manage_EventTypes::Update($_REQUEST["id"], $_REQUEST["EventID"], $_REQUEST["EduGroupCode"]);
         else
-            manage_EventTypes::Add($_REQUEST["EventID"], $_REQUEST["FacCode"]);
+            manage_EventTypes::Add($_REQUEST["EventID"], $_REQUEST["EduGroupCode"]);
     }
     if(isset($_REQUEST["id"]))
     {
-        $obj = new be_EventUnit();
+        $obj = new be_EventSubUnit();
         $obj->LoadDataFromDatabase($_REQUEST["id"]);
         $EventID = $obj->EventID;
-        $FacCode = $obj->FacCode;
+        $EduGroupCode = $obj->EduGroupCode;
     }
     else
         $EventID = "";
-        $FacCode = "";
+        $EduGroupCode = "";
     ?>
-    
+
 <div class="container-fluid">
 <div class="row">
 <div class="col-2" ></div>
@@ -34,7 +34,7 @@
     ?>
     <table class="table table-sm table-stripped table-bordered">
     <tr class="HeaderOfTable">
-    <td align="center">واحد سازمانی</td>
+    <td align="center">زیرواحد سازمانی هدف</td>
     </tr>
     <tr>
     <td>
@@ -63,14 +63,14 @@
         <td>رویداد</td>
     </thead>
     <?
-        $res = manage_EventUnits::GetList();
+        $res = manage_EventSubUnits::GetList();
         for($i=0; $i<count($res); $i++)
         {
             $id = $res[$i]->id;
             $CheckBoxId = "ch_".$id;
             if(isset($_POST[$CheckBoxId]))
             {
-                manage_EventUnits::Remove($id);
+                manage_EventSubUnits::Remove($id);
             }
             else
             {
@@ -81,8 +81,8 @@
                 echo "</td>";
 
                 echo "<td>";
-                echo "<a href='ManageEventUnits.php?id=".$id."'>";
-                echo $res[$i]->FacCode;
+                echo "<a href='ManageEventSubUnits.php?id=".$id."'>";
+                echo $res[$i]->EduGroupCode;
                 echo "</a>";
                 echo "</td>";
                 echo "</tr>";
