@@ -15,6 +15,7 @@
         public $level;
         public $CreatorID;
         public $EventTypeID;
+        public $title;
 
         function LoadDataFromDatabase($RecID)
         {
@@ -42,27 +43,28 @@
                 $this->level=$rec["level"];
                 $this->CreatorID=$rec["CreatorID"];
                 $this->EventTypeID=$rec["EventTypeID"];
+                $this->title=$rec["title"];
             }
         }
     }
 
     class manage_Event
     {
-        static function Add($StartTime,$EndTime,$description,$level,$CreatorID,$EventTypeID)
+        static function Add($StartTime,$EndTime,$description,$level,$CreatorID,$EventTypeID,$title)
         {
             $mysql = pdodb::getInstance();
-            $query = "insert into EventCalendar.events (StartTime,EndTime,description,level,CreatorID,EventTypeID) values (?,?,?,?,?,?)";
+            $query = "insert into EventCalendar.events (StartTime,EndTime,description,level,CreatorID,EventTypeID,title) values (?,?,?,?,?,?,?)";
             $mysql->Prepare($query);
-            $mysql->ExecuteStatement(array($StartTime,$EndTime,$description,$level,$CreatorID,$EventTypeID));
+            $mysql->ExecuteStatement(array($StartTime,$EndTime,$description,$level,$CreatorID,$EventTypeID,$title));
             return true;
         }
 
-        static function Update($id,$StartTime,$EndTime,$description,$level,$CreatorID,$EventTypeID)
+        static function Update($id,$StartTime,$EndTime,$description,$level,$CreatorID,$EventTypeID,$title)
         {
             $mysql = pdodb::getInstance();
-            $query = "update EventCalendar.events set StartTime=?, EndTime=?, description=?, level=?, CreatorID=?, EventTypeID=? where id=?";
+            $query = "update EventCalendar.events set StartTime=?, EndTime=?, description=?, level=?, CreatorID=?, EventTypeID=?, title=? where id=?";
             $mysql->Prepare($query);
-            $mysql->ExecuteStatement(array($StartTime,$EndTime,$description,$level,$CreatorID,$EventTypeID, $id));
+            $mysql->ExecuteStatement(array($StartTime,$EndTime,$description,$level,$CreatorID,$EventTypeID, $title, $id));
             return true;
         }
 
@@ -99,6 +101,7 @@
                 $ret[$k]->level=$rec["level"];
                 $ret[$k]->CreatorID=$rec["CreatorID"];
                 $ret[$k]->EventTypeID=$rec["EventTypeID"];
+                $ret[$k]->title=$rec["title"];
                 
                 $k++;
     

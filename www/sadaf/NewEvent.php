@@ -3,6 +3,7 @@
     include "classes/Event.class.php";
     include "classes/EventTypes.class.php";
     include "classes/EventAccess.class.php";
+    include "classes/EventUnits.class.php";
     HTMLBegin();
 
     
@@ -39,6 +40,7 @@
         $level = $obj->level;
         $CreatorID = $obj->CreatorID;
         $EventTypeID = $obj->EventTypeID;
+        $title = $obj->title;
     }
     else
     {
@@ -54,6 +56,7 @@
         $level = "";
         $CreatorID = "";
         $EventTypeID = "";
+        $title = "";
     }
     ?>
 
@@ -74,12 +77,20 @@
             <tr>
                 <td>
                     <table width="100%" border="0">
-            <tr>
+                <tr>
                 <td width="1%" nowrap>
                     <b>عنوان</b>
                 </td>
                 <td nowrap>
                     <input class="form-control sadaf-m-input" type="text" name="description" id="description" maxlength="45" value="<? echo $description ?>">
+                </td>
+            </tr>
+            <tr>
+                <td width="1%" nowrap>
+                    <b>توضیحات</b>
+                </td>
+                <td nowrap>
+                    <input class="form-control sadaf-m-input" type="text" name="title" id="title" maxlength="45" value="<? echo $title ?>">
                 </td>
             </tr>
             <tr>
@@ -132,6 +143,33 @@
                         <option <? if($level =="2") echo"selected" ?> id="2">2</option>
                         <option <? if($level =="3") echo"selected" ?> id="3">3</option>
                         <option <? if($level =="4") echo"selected" ?> id="4">4</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td width="1%" nowrap>
+                    <b>واحد سازمانی</b>
+                </td>
+                <td nowrap>
+                    <select name="unit" id="unit">
+                        <option id="NONE">None</option>
+                        <option <? if($unit =="EMAIL") echo"selected" ?> id="EMAIL">Email</option>
+                        <option <? if($unit =="SMS") echo"selected" ?> id="SMS">SMS</option>
+                        <option <? if($unit =="PORTAL") echo"selected" ?> id="PORTAL">Portal</option>
+                    </select>
+                </td>
+        </td>
+            </tr>
+            <tr>
+                <td width="1%" nowrap>
+                    <b>زیرواحد سازمانی</b>
+                </td>
+                <td nowrap>
+                    <select name="SubUnit" id="SubUnit">
+                        <option id="NONE">None</option>
+                        <option <? if($SubUnit =="EMAIL") echo"selected" ?> id="EMAIL">Email</option>
+                        <option <? if($SubUnit =="SMS") echo"selected" ?> id="SMS">SMS</option>
+                        <option <? if($SubUnit =="PORTAL") echo"selected" ?> id="PORTAL">Portal</option>
                     </select>
                 </td>
             </tr>

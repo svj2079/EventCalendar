@@ -138,7 +138,7 @@
         }
     ?>
     <tr class="FooterOfTable">
-        <td colspan=4 align="center">
+        <td colspan=6 align="center">
             <input type=button class="btn btn-danger" value="حذف" onclick="if(confirm('آیا مطمئن هستید')) document.f1.submit();">
         </td>
     </tr>

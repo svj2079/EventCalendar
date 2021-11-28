@@ -4,7 +4,8 @@
     {
         public $id;
         public $EventID;
-        public $FacCode;
+        public $UnitID;
+        public $SubUnitID;
 
         function LoadDataFromDatabase($RecID)
         {
@@ -16,7 +17,8 @@
             {
                 $this->id=$rec["id"];
                 $this->EventID=$rec["EventID"];
-                $this->FacCode=$rec["FacCode"];
+                $this->UnitID=$rec["UnitID"];
+                $this->SubUnitID=$rec["SubUnitID"];
             }
         }
 
@@ -24,12 +26,12 @@
 
     class manage_EventUnits
     {
-        static function Add($EventID, $FacCode)
+        static function Add($EventID, $UnitID, $SubUnitID)
         {
             $mysql = pdodb::getInstance();
-            $query = "insert into EventCalendar.EventUnits (EventID, FacCode) values (?, ?)";
+            $query = "insert into EventCalendar.EventUnits (EventID, UnitID, SubUnitID) values (?, ?, ?)";
             $mysql->Prepare($query);
-            $mysql->ExecuteStatement(array($EventID, $FacCode));
+            $mysql->ExecuteStatement(array($EventID, $UnitID, $SubUnitID));
             return true;
 
         }
@@ -56,7 +58,8 @@
                 $ret[$k] = new be_EventUnit();
                 $ret[$k]->id=$rec["id"];
                 $ret[$k]->EventID=$rec["EventID"];
-                $ret[$k]->FacCode=$rec["FacCode"];
+                $ret[$k]->UnitID=$rec["UnitID"];
+                $ret[$k]->SubUnitID=$rec["SubUnitID"];
                 $k++;
     
             }

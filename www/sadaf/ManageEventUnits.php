@@ -3,23 +3,27 @@
     include "classes/EventUnits.class.php";
     HTMLBegin(); 
 
-    if(isset($_REQUEST["FacCode"]))
+    if(isset($_REQUEST["UnitID"]))
     {
+        
         if(isset($_REQUEST["id"]))
-            manage_EventTypes::Update($_REQUEST["id"], $_REQUEST["EventID"], $_REQUEST["FacCode"]);
+            manage_EventUnits::Update($_REQUEST["id"], $_REQUEST["EventID"], $_REQUEST["UnitID"], $_REQUEST["SubUnitID"]);
         else
-            manage_EventTypes::Add($_REQUEST["EventID"], $_REQUEST["FacCode"]);
+            manage_EventUnits::Add($_REQUEST["EventID"], $_REQUEST["UnitID"], $_REQUEST["SubUnitID"]);
     }
     if(isset($_REQUEST["id"]))
     {
+        
         $obj = new be_EventUnit();
         $obj->LoadDataFromDatabase($_REQUEST["id"]);
         $EventID = $obj->EventID;
-        $FacCode = $obj->FacCode;
+        $UnitID = $obj->UnitID;
+        $SubUnitID = $obj->SubUnitID
     }
     else
         $EventID = "";
-        $FacCode = "";
+        $UnitID = "";
+        $SubUnitID = "";
     ?>
     
 <div class="container-fluid">
@@ -36,23 +40,6 @@
     <tr class="HeaderOfTable">
     <td align="center">واحد سازمانی</td>
     </tr>
-    <tr>
-    <td>
-    <table width="100%" border="0">
-    <tr>
-        <td width="1%" nowrap>
-    رویداد
-        </td>
-        <td nowrap>
-        <input class="form-control sadaf-m-input" type="text" name="description" id="description" maxlength="45" value="<? echo $description ?>">
-        </td>
-    </tr>
-    <tr class="FooterOfTable">
-    <td align="center" colspan="2">
-        <input type="button" class="btn btn-info" onclick="javascript: ValidateForm();" value="ذخیره">
-        <input type="button" class="btn " onclick="javascript: document.location='ManageEventTypes.php';" value="جدید">
-    </td>
-    </tr>
     </table>
 </form>
 
@@ -60,7 +47,7 @@
 <table class="table table-sm table-stripped table-bordered">
     <thead>
         <td>&nbsp;</td>
-        <td>رویداد</td>
+        <td>واحد سازمانی</td>
     </thead>
     <?
         $res = manage_EventUnits::GetList();
@@ -82,7 +69,7 @@
 
                 echo "<td>";
                 echo "<a href='ManageEventUnits.php?id=".$id."'>";
-                echo $res[$i]->FacCode;
+                echo $res[$i]->UnitID;
                 echo "</a>";
                 echo "</td>";
                 echo "</tr>";
