@@ -66,4 +66,24 @@
             return $ret;
 
         }
+
+        static function CreateSelectBoxOptions($SelectBoxName, $UnitID)
+        {
+            $ret="<select id='".$SelectBoxName."' name='".$SelectBoxName."'>";
+            $mysql = pdodb::getInstance();
+            $query = "select * from EventCalendar.EventUnits";
+            $mysql->Prepare($query);
+            $res = $mysql->ExecuteStatement(array());
+            $k = 0;
+            while($rec = $res->fetch())
+            {
+                if($rec["id"]==$EventTypeID)
+                    $ret.="<option value='".$rec["id"]."' selected>".$rec["UnitID"]."</option>";
+                else
+                    $ret.="<option value='".$rec["id"]."'>".$rec["UnitID"]."</option>";
+            }
+            $ret .= "</select>";
+            return $ret;                
+
+        }
     }

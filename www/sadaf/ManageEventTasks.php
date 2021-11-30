@@ -115,7 +115,7 @@
             {
                 echo "<tr>";
 
-                echo "<td>";
+                echo "<td width='5%'>";
                 echo "<input type=checkbox name='".$CheckBoxId."'>";
                 echo "</td>";
 

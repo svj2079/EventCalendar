@@ -151,12 +151,7 @@
                     <b>واحد سازمانی</b>
                 </td>
                 <td nowrap>
-                    <select name="unit" id="unit">
-                        <option id="NONE">None</option>
-                        <option <? if($unit =="EMAIL") echo"selected" ?> id="EMAIL">Email</option>
-                        <option <? if($unit =="SMS") echo"selected" ?> id="SMS">SMS</option>
-                        <option <? if($unit =="PORTAL") echo"selected" ?> id="PORTAL">Portal</option>
-                    </select>
+                    <?echo manage_EventUnits::CreateSelectBoxOptions("UnitID",$UnitID);?>
                 </td>
         </td>
             </tr>
@@ -165,12 +160,7 @@
                     <b>زیرواحد سازمانی</b>
                 </td>
                 <td nowrap>
-                    <select name="SubUnit" id="SubUnit">
-                        <option id="NONE">None</option>
-                        <option <? if($SubUnit =="EMAIL") echo"selected" ?> id="EMAIL">Email</option>
-                        <option <? if($SubUnit =="SMS") echo"selected" ?> id="SMS">SMS</option>
-                        <option <? if($SubUnit =="PORTAL") echo"selected" ?> id="PORTAL">Portal</option>
-                    </select>
+                    <?echo manage_EventUnits::CreateSelectBoxOptions("SubUnitID",$SubUnitID);?>
                 </td>
             </tr>
             <tr class="FooterOfTable">

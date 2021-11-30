@@ -5,7 +5,6 @@
 
     if(isset($_REQUEST["UnitID"]))
     {
-        
         if(isset($_REQUEST["id"]))
             manage_EventUnits::Update($_REQUEST["id"], $_REQUEST["EventID"], $_REQUEST["UnitID"], $_REQUEST["SubUnitID"]);
         else
@@ -18,12 +17,14 @@
         $obj->LoadDataFromDatabase($_REQUEST["id"]);
         $EventID = $obj->EventID;
         $UnitID = $obj->UnitID;
-        $SubUnitID = $obj->SubUnitID
+        $SubUnitID = $obj->SubUnitID;
     }
     else
+    {
         $EventID = "";
         $UnitID = "";
         $SubUnitID = "";
+    }
     ?>
     
 <div class="container-fluid">
@@ -38,7 +39,7 @@
     ?>
     <table class="table table-sm table-stripped table-bordered">
     <tr class="HeaderOfTable">
-    <td align="center">واحد سازمانی</td>
+    <td align="center">واحدهای مرتبط</td>
     </tr>
     </table>
 </form>
@@ -48,6 +49,7 @@
     <thead>
         <td>&nbsp;</td>
         <td>واحد سازمانی</td>
+        <td>زیر واحد سازمانی</td>
     </thead>
     <?
         $res = manage_EventUnits::GetList();
@@ -63,7 +65,7 @@
             {
                 echo "<tr>";
 
-                echo "<td width='10%'>";
+                echo "<td width='5%'>";
                 echo "<input type=checkbox name='".$CheckBoxId."'>";
                 echo "</td>";
 
@@ -72,12 +74,17 @@
                 echo $res[$i]->UnitID;
                 echo "</a>";
                 echo "</td>";
+                echo "<td>";
+                echo "<a href='ManageEventUnits.php?id=".$id."'>";
+                echo $res[$i]->SubUnitID;
+                echo "</a>";
+                echo "</td>";
                 echo "</tr>";
             }
         }
     ?>
     <tr class="FooterOfTable">
-        <td colspan=2 align="center">
+        <td colspan=3 align="center">
             <input type=button class="btn btn-danger" value="حذف" onclick="if(confirm('آیا مطمئن هستید')) document.f1.submit();">
         </td>
     </tr>
