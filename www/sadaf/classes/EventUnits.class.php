@@ -71,16 +71,16 @@
         {
             $ret="<select id='".$SelectBoxName."' name='".$SelectBoxName."'>";
             $mysql = pdodb::getInstance();
-            $query = "select * from EventCalendar.EventUnits";
+            $query = "select * from baseinfo.UmStructure";
             $mysql->Prepare($query);
             $res = $mysql->ExecuteStatement(array());
             $k = 0;
             while($rec = $res->fetch())
             {
                 if($rec["id"]==$EventTypeID)
-                    $ret.="<option value='".$rec["id"]."' selected>".$rec["UnitID"]."</option>";
+                    $ret.="<option value='".$rec["id"]."' selected>".$rec["StructTitle"]."</option>";
                 else
-                    $ret.="<option value='".$rec["id"]."'>".$rec["UnitID"]."</option>";
+                    $ret.="<option value='".$rec["id"]."'>".$rec["StructTitle"]."</option>";
             }
             $ret .= "</select>";
             return $ret;                

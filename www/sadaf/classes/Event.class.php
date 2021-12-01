@@ -101,7 +101,7 @@
                 $ret[$k]->level=$rec["level"];
                 $ret[$k]->CreatorID=$rec["CreatorID"];
                 $ret[$k]->EventTypeID=$rec["EventTypeID"];
-                $ret[$k]->title=$rec["title"];
+                $ret[$k]->title=$rec["title"]; 
                 
                 $k++;
     
