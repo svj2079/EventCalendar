@@ -1,0 +1,54 @@
+element.style {
+
+}
+.block .minicalendar {
+    max-width: 280px;
+    margin: 0 auto;
+        margin-top: 0px;
+        margin-right: auto;
+        margin-bottom: 0px;
+        margin-left: auto;
+    width: 100%;
+}
+table {
+    border-collapse: collapse;
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+table {
+    display: table;
+    text-indent: initial;
+    border-spacing: 2px;
+        -webkit-border-horizontal-spacing: 2px;
+        -webkit-border-vertical-spacing: 2px;
+    border-color: gray;
+        border-top-color: gray;
+        border-right-color: gray;
+        border-bottom-color: gray;
+        border-left-color: gray;
+}
+body, p, div, span, a, font, .tooltip {
+    font-family: "persian"!important;
+}
+.card {
+    word-wrap: break-word;
+}
+body {
+    -webkit-font-smoothing: antialiased;
+}
+/*@media (max-width: 1200px)
+body {
+    font-size: calc(.90375rem + .045vw);
+}*/
+body {
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: right;
+    background-color: #fff;
+}
+:root {
+    --blue: #0f6fc5;
+    
+}
