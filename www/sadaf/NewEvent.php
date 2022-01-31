@@ -18,9 +18,9 @@
         $e= substr($e , 0 , 4)."-".substr($e , 4 , 2)."-".substr($e , 6 ,2)." ".$_REQUEST["EndHour"].":".$_REQUEST["EndMinute"];
 
         if(isset($_REQUEST["id"]))
-            manage_Event::Update($_REQUEST["id"], $s, $e, $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["PersonID"], $_REQUEST["EventTypeID"]);
+            manage_Event::Update($_REQUEST["id"], $s, $e, $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["PersonID"], $_REQUEST["EventTypeID"], $_REQUEST["title"]);
         else
-            manage_Event::Add($s, $e, $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["PersonID"], $_REQUEST["EventTypeID"]);
+            manage_Event::Add($s, $e, $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["PersonID"], $_REQUEST["EventTypeID"], $_REQUEST["title"]);
             echo "<script>document.location='ManageEvent.php';</script>";
     }
 

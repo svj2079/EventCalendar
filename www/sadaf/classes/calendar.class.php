@@ -2,9 +2,9 @@
 
 function ShowCalendar($FromMonth=1)
 {
-    echo "1";
-    die();
-    
+    //echo "1";
+    //die();
+
     $now = date("Ymd");
     $yy = substr($now,0,4);
     $mm = substr($now,4,2);
@@ -200,3 +200,5 @@ function CreateDayCellInCalendar($CurYear, $month, $day, $dd, $mm)
     }
     return $list;
 }
+
+// .git    شاخه کد    .config
