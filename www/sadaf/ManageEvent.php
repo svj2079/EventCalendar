@@ -38,7 +38,7 @@
                         
                         echo "<td>";
                         echo "<a href='NewEvent.php?id=".$id."'>";
-                        echo $res[$i]->description;
+                        echo $res[$i]->title; 
                         echo "</a>";
                         echo "</td>";
                         echo "<td>";

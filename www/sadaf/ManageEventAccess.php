@@ -73,6 +73,7 @@
     </thead>
     <?
         $res = manage_EventAccess::GetList();
+        if ($res != null)
         for($i=0; $i<count($res); $i++)
         {
             $id = $res[$i]->id;

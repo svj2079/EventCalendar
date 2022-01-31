@@ -1,6 +1,6 @@
 # IDEs and editors
 .idea/
-
+.htaccess
 #config files
 www/.htaccess
 shares/MySql.config.php

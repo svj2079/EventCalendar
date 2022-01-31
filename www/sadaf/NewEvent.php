@@ -8,20 +8,20 @@
 
     
 
-    if(isset($_REQUEST["StartTime"]))
+    if(isset($_REQUEST["StartDate"]))
     {
-        
-        $s=xdate($_REQUEST["StartTime"]);
+       
+        $s=xdate($_REQUEST["StartDate"]);
         $s= substr($s , 0 , 4)."-".substr($s , 4 , 2)."-".substr($s , 6 ,2)." ".$_REQUEST["StartHour"].":".$_REQUEST["StartMinute"];
 
-        $e=xdate($_REQUEST["EndTime"]);
+        $e=xdate($_REQUEST["EndDate"]);
         $e= substr($e , 0 , 4)."-".substr($e , 4 , 2)."-".substr($e , 6 ,2)." ".$_REQUEST["EndHour"].":".$_REQUEST["EndMinute"];
 
         if(isset($_REQUEST["id"]))
             manage_Event::Update($_REQUEST["id"], $s, $e, $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["PersonID"], $_REQUEST["EventTypeID"], $_REQUEST["title"]);
         else
-            manage_Event::Add($s, $e, $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["PersonID"], $_REQUEST["EventTypeID"], $_REQUEST["title"]);
-            echo "<script>document.location='ManageEvent.php';</script>";
+            manage_Event::Add($s, $e, $_REQUEST["description"], $_REQUEST["level"], $_SESSION["PersonID"], $_REQUEST["EventTypeID"], $_REQUEST["title"]);
+            //echo "<script>document.location='ManageEvent.php';</script>";
     }
 
     if(isset($_REQUEST["id"]))
