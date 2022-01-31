@@ -3,6 +3,11 @@
     include "classes/EventUnits.class.php";
     HTMLBegin(); 
 
+    function ReturnCode ()
+    {
+        $query ="";
+    }
+
     if(isset($_REQUEST["UnitID"]))
     {
         if(isset($_REQUEST["id"]))
@@ -53,6 +58,7 @@
     </thead>
     <?
         $res = manage_EventUnits::GetList();
+        if ($res != null)
         for($i=0; $i<count($res); $i++)
         {
             $id = $res[$i]->id;

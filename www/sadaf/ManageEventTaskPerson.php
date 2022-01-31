@@ -70,6 +70,7 @@
     </thead>
     <?
         $res = manage_EventTaskPerson::GetList($EventTaskID);
+        if ($res != null)
         for($i=0; $i<count($res); $i++)
         {
             $id = $res[$i]->id;

@@ -103,6 +103,7 @@
     </thead>
     <?
         $res = manage_EventTasks::GetList($_REQUEST["EventID"]);
+        if ($res != null)
         for($i=0; $i<count($res); $i++)
         {
             $id = $res[$i]->id;
