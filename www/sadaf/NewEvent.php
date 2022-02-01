@@ -6,7 +6,8 @@
     include "classes/EventUnits.class.php";
     HTMLBegin();
 
-    
+    $UnitID=0;
+    $SubUnitID=0;
 
     if(isset($_REQUEST["StartDate"]))
     {
@@ -151,7 +152,7 @@
                     <b>واحد سازمانی</b>
                 </td>
                 <td nowrap>
-                    <?echo manage_EventUnits::CreateSelectBoxOptions("UnitID",$UnitID);?>
+                    <?echo manage_EventUnits::CreateUnitSelectOptions("UnitID",$UnitID);?>
                 </td>
         </td>
             </tr>
@@ -160,7 +161,7 @@
                     <b>زیرواحد سازمانی</b>
                 </td>
                 <td nowrap>
-                    <?echo manage_EventUnits::CreateSelectBoxOptions("SubUnitID",$SubUnitID);?>
+                    <?echo manage_EventUnits::CreateSubUnitSelectOptions("SubUnitID", $UnitID ,$SubUnitID);?>
                 </td>
             </tr>
             <tr class="FooterOfTable">

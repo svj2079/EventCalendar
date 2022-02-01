@@ -52,13 +52,8 @@
                         echo "</a>";
                         echo "</td>";
                         echo "<td>";
-                        echo "<a href='ManageEventAccess.php?=".$id."'>";
+                        echo "<a href='ManageEventAccess.php?EventID=".$id."'>";
                         echo "مدیران";
-                        echo "</a>";
-                        echo "</td>";
-                        echo "<td>";
-                        echo "<a href='ManageEventTaskPerson.php?=".$id."'>";
-                        echo "مجریان";
                         echo "</a>";
                         echo "</td>";
                         echo "<td>";

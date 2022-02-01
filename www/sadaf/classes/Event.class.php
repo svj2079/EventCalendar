@@ -32,11 +32,11 @@
             {
                 $this->id=$rec["id"];
                 $this->ShStartDate=$rec["ShStartDate"];
-                $this->StartDate=$rec["StartDate"];
+                $this->StartTime=$rec["StartTime"];
                 $this->StartHour=$rec["StartHour"];
                 $this->StartMinute=$rec["StartMinute"];
                 $this->ShEndDate=$rec["ShEndDate"];
-                $this->EndDate=$rec["EndDate"];
+                $this->EndTime=$rec["EndTime"];
                 $this->EndHour=$rec["EndHour"];
                 $this->EndMinute=$rec["EndMinute"];
                 $this->description=$rec["description"];
@@ -90,13 +90,13 @@
                 $ret[$k] = new be_Event();
                 $ret[$k]->id=$rec["id"];
                 $ret[$k]->ShStartDate=$rec["ShStartDate"];
-                $ret[$k]->StartDate=$rec["StartDate"];
-                $ret[$k]->StartHour=$rec["StartHour"];
-                $ret[$k]->StartMinute=$rec["StartMinute"];
+                //$ret[$k]->StartDate=$rec["StartDate"];
+                //$ret[$k]->StartHour=$rec["StartHour"];
+                //$ret[$k]->StartMinute=$rec["StartMinute"];
                 $ret[$k]->ShEndDate=$rec["ShEndDate"];
-                $ret[$k]->EndDate=$rec["EndDate"];
-                $ret[$k]->EndHour=$rec["EndHour"];
-                $ret[$k]->EndMinute=$rec["EndMinute"];
+                //$ret[$k]->EndDate=$rec["EndDate"];
+                //$ret[$k]->EndHour=$rec["EndHour"];
+                //$ret[$k]->EndMinute=$rec["EndMinute"];
                 $ret[$k]->description=$rec["description"];
                 $ret[$k]->level=$rec["level"];
                 $ret[$k]->CreatorID=$rec["CreatorID"];

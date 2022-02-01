@@ -3,10 +3,26 @@
     include "classes/EventUnits.class.php";
     HTMLBegin(); 
 
-    function ReturnCode ()
+    
+
+    function GetUnitCode ($PersonID)
     {
-        $query ="";
+        
+        $mysql = pdodb::getInstance();
+        $query ="select UnitCode from hrmstotal.staff join hrmstotal.persons on (
+            persons.PersonID = staff.PersonID and persons.person_type = staff.person_type)
+            where persons.PersonID = ?";
+
+        $mysql->Prepare($query);
+        $res = $mysql->ExecuteStatement(array($PersonID));
+
+        if ($rec = $res->fetch())
+            return $rec["UnitCode"];
+        
+        return 0;
+
     }
+    
 
     if(isset($_REQUEST["UnitID"]))
     {

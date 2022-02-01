@@ -2,7 +2,8 @@
     include "header.inc.php";
     include "classes/EventTaskPerson.class.php";
     HTMLBegin(); 
-
+    
+    
     $EventTaskID=$_REQUEST["EventTaskID"];
     
     if(isset($_REQUEST["PersonID"]))

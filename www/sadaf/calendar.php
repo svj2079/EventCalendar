@@ -4,4 +4,5 @@
     include "classes/calendar.class.php";
     //include "classes\EventTaskPerson.class.php";
     HTMLBegin();
+    ShowCalendar();
     ?>

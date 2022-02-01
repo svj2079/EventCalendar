@@ -100,6 +100,7 @@
         <td>شرح</td>
         <td>سطح اهمیت</td>
         <td>نوع اطلاع رسانی</td>
+        <td>مجریان</td>
     </thead>
     <?
         $res = manage_EventTasks::GetList($_REQUEST["EventID"]);
@@ -130,10 +131,10 @@
                 echo $res[$i]->NotificationType;
                 echo "</td>";
                 echo "<td>";
-                echo "<a href='ManageEventTasksperson.php?id=".$id."'>";
-                echo $res[$i]->EventTaskPerson;
+                echo "<a href='ManageEventTaskPerson.php?EventTaskID=".$id."'>";
+                echo "مجریان";
                 echo "</a>";
-                echo "<td>";
+                echo "</td>";
                 echo "</tr>";
             }
         }
