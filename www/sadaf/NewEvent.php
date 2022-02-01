@@ -4,6 +4,13 @@
     include "classes/EventTypes.class.php";
     include "classes/EventAccess.class.php";
     include "classes/EventUnits.class.php";
+
+    if (isset($_REQUEST["GetSubUnits"]))
+    {
+        echo manage_EventUnits::CreateSubUnitSelectOptions("SubUnitID", $_REQUEST["GetSubUnits"] ,0);
+        die();
+    }
+
     HTMLBegin();
 
     $UnitID=0;
@@ -83,7 +90,7 @@
                     <b>عنوان</b>
                 </td>
                 <td nowrap>
-                    <input class="form-control sadaf-m-input" type="text" name="description" id="description" maxlength="45" value="<? echo $description ?>">
+                    <input class="form-control sadaf-m-input" type="text" name="title" id="title" maxlength="45" value="<? echo $title ?>">
                 </td>
             </tr>
             <tr>
@@ -91,7 +98,7 @@
                     <b>توضیحات</b>
                 </td>
                 <td nowrap>
-                    <input class="form-control sadaf-m-input" type="text" name="title" id="title" maxlength="45" value="<? echo $title ?>">
+                    <input class="form-control sadaf-m-input" type="text" name="description" id="description" maxlength="45" value="<? echo $description ?>">
                 </td>
             </tr>
             <tr>
@@ -161,7 +168,9 @@
                     <b>زیرواحد سازمانی</b>
                 </td>
                 <td nowrap>
-                    <?echo manage_EventUnits::CreateSubUnitSelectOptions("SubUnitID", $UnitID ,$SubUnitID);?>
+                    <span id="SpanSubUnitID">
+                        <?echo manage_EventUnits::CreateSubUnitSelectOptions("SubUnitID", $UnitID ,$SubUnitID);?>
+                    </span>
                 </td>
             </tr>
             <tr class="FooterOfTable">
@@ -183,6 +192,20 @@
 	{
 		document.f2.submit();
 	}
+
+    function SetUnit()
+    {
+        UnitID = document.getElementById('UnitID');
+       
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById ('SpanSubUnitID').innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET", "NewEvent.php?GetSubUnits="+UnitID.value, true);
+        xmlhttp.send(); 
+    }
 </script>
 
 

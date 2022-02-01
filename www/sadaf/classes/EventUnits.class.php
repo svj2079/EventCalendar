@@ -69,7 +69,7 @@ class manage_EventUnits
 
     static function CreateUnitSelectOptions($SelectBoxName, $UnitID)
     {
-        $ret="<select id='".$SelectBoxName."' name='".$SelectBoxName."'>";
+        $ret="<select id='".$SelectBoxName."' name='".$SelectBoxName."' onchange= 'SetUnit()'>";
         $mysql = pdodb::getInstance();
         $query = "select * from baseinfo.UmStructure where StructParentID = 1";
         $mysql->Prepare($query);
@@ -89,7 +89,7 @@ class manage_EventUnits
 
     static function CreateSubUnitSelectOptions($SelectBoxName, $UnitID , $SubUnitID)
     {
-        $ret="<select id='".$SelectBoxName."' name='".$SelectBoxName."'>";
+        $ret="<select id='".$SelectBoxName."' name='".$SelectBoxName.">";
         $mysql = pdodb::getInstance();
         $query = "select * from baseinfo.UmStructure where StructParentID = ?";
         $mysql->Prepare($query);

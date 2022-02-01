@@ -1,7 +1,16 @@
 <?php
     include "header.inc.php";
     include "classes/EventTaskPerson.class.php";
+    include "classes/EventAccess.class.php";
     HTMLBegin(); 
+    
+
+    if (isset($_REQUEST["GetPersons"]))
+    {
+        echo manage_EventAccess::GetPersons($_REQUEST["GetPersons"]);
+        die();
+    }
+    
     
     
     $EventTaskID=$_REQUEST["EventTaskID"];
@@ -45,11 +54,8 @@
     نام و نام خانوادگی
         </td>
         <td nowrap>
-              <select name="PersonID" id="PersonID">
-                <option id="NONE">None</option>
-                <option <? if($PersonID =="1") echo"selected" ?> id="1">?!</option>
-                <option <? if($PersonID =="2") echo"selected" ?> id="2">?!!</option>
-              </select>
+            <input class="form-control sadaf-m-input" type="text" name="PersonName" id="PersonName" maxlength="45" onchange="javascript: SetPersons()">
+            <span id="SpanPersonID"></span>
         </td>
     </tr>
     <tr class="FooterOfTable">
@@ -113,4 +119,24 @@
 	{
 		document.f2.submit();
 	}
+
+    function SetPersons()
+    {
+        
+        PersonName = document.getElementById('PersonName');
+        console.log(PersonName.value);
+        if (PersonName.value.length < 3)
+        {
+            document.getElementById ('SpanPersonID').innerHTML = "<select id = 'PersonID' name = 'PersonID'></select>";
+            return;
+        }
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById ('SpanPersonID').innerHTML = "<select id = 'PersonID' name = 'PersonID'>"+this.responseText+"</select>";
+            }
+        };
+        xmlhttp.open("GET", "ManageEventTaskPerson.php?GetPersons="+PersonName.value, true);
+        xmlhttp.send(); 
+    }
 </script>

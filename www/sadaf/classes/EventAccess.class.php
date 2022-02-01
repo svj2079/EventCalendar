@@ -57,6 +57,25 @@
 
         }
 
+
+        static function GetPersons($PersonName)
+        {
+            $mysql = pdodb::getInstance();
+            $query = "select * from hrmstotal.persons join hrmstotal.staff on(
+                persons.PersonID = staff.PersonID and persons.person_type = staff.person_type)
+                where concat(pfname,'',plname) like ?";
+            $mysql->Prepare($query);
+            $res = $mysql->ExecuteStatement(array("%".$PersonName."%"));
+            $ret="";
+            while($rec = $res->fetch())
+            {
+                $ret.="<option value='".$rec["PersonID"]."'>".$rec["pfname"]." ".$rec["plname"]."</option>";
+            }
+            return $ret;
+
+        } 
+
+
         static function GetList()
         {
             $mysql = pdodb::getInstance();
