@@ -59,8 +59,10 @@
                 $k++;
     
             }
-            return $ret;   
-
+            if (isset($ret))
+                return $ret;   
+            else
+                return null;
         }
     }
 
