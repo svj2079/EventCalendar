@@ -46,16 +46,18 @@
         static function GetList($EventTaskID)
         {
             $mysql = pdodb::getInstance();
-            $query = "select * from EventCalendar.EventTaskPerson where EventTaskID=?";
+            $query = "select id,EventTaskID, PersonID, concat(pfname,' ', plname) as FullName from EventCalendar.EventTaskPerson 
+            LEFT JOIN hrmstotal.persons using (PersonID) where EventTaskID=?";
             $mysql->Prepare($query);
             $res = $mysql->ExecuteStatement(array($EventTaskID));
             $k = 0;
             while($rec = $res->fetch())
             {
-                $ret[$k] = new be_EventType();
+                $ret[$k] = new be_EventTaskPerson();
                 $ret[$k]->id=$rec["id"];
                 $ret[$k]->EventTaskID=$rec["EventTaskID"];
                 $ret[$k]->PersonID=$rec["PersonID"];
+                $ret[$k]->FullName=$rec["FullName"];
                 $k++;
     
             }

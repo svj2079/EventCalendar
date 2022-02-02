@@ -11,13 +11,29 @@
         die();
     }
 
+
     HTMLBegin();
 
     $UnitID=0;
     $SubUnitID=0;
+    $ForProf="NO";
+    $ForStudent="NO";
+    $ForStaff="NO";
 
     if(isset($_REQUEST["StartDate"]))
     {
+        if(isset($_REQUEST["ForProf"]))
+        {
+            $ForProf="YES";
+        }
+        if(isset($_REQUEST["ForStudent"]))
+        {
+            $ForStudent="YES";
+        }
+        if(isset($_REQUEST["ForStaff"]))
+        {
+            $ForStaff="YES";
+        }
        
         $s=xdate($_REQUEST["StartDate"]);
         $s= substr($s , 0 , 4)."-".substr($s , 4 , 2)."-".substr($s , 6 ,2)." ".$_REQUEST["StartHour"].":".$_REQUEST["StartMinute"];
@@ -26,9 +42,9 @@
         $e= substr($e , 0 , 4)."-".substr($e , 4 , 2)."-".substr($e , 6 ,2)." ".$_REQUEST["EndHour"].":".$_REQUEST["EndMinute"];
 
         if(isset($_REQUEST["id"]))
-            manage_Event::Update($_REQUEST["id"], $s, $e, $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["PersonID"], $_REQUEST["EventTypeID"], $_REQUEST["title"]);
+            manage_Event::Update($_REQUEST["id"], $s, $e, $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["EventTypeID"], $_REQUEST["title"], $ForProf, $ForStudent, $ForStaff, $_REQUEST["UnitID"], $_REQUEST["SubUnitID"]);
         else
-            manage_Event::Add($s, $e, $_REQUEST["description"], $_REQUEST["level"], $_SESSION["PersonID"], $_REQUEST["EventTypeID"], $_REQUEST["title"]);
+            manage_Event::Add($s, $e, $_REQUEST["description"], $_REQUEST["level"], $_SESSION["PersonID"], $_REQUEST["EventTypeID"], $_REQUEST["title"], $ForProf, $ForStudent, $ForStaff, $_REQUEST["UnitID"], $_REQUEST["SubUnitID"]);
             //echo "<script>document.location='ManageEvent.php';</script>";
     }
 
@@ -49,6 +65,11 @@
         $CreatorID = $obj->CreatorID;
         $EventTypeID = $obj->EventTypeID;
         $title = $obj->title;
+        $ForProf = $obj->ForProf;
+        $ForStudent = $obj->ForStudent;
+        $ForStaff = $obj->ForStaff;
+        $UnitID = $obj->UnitID;
+        $SubUnitID = $obj->SubUnitID;
     }
     else
     {
@@ -65,6 +86,11 @@
         $CreatorID = "";
         $EventTypeID = "";
         $title = "";
+        $ForProf = "";
+        $ForStudent = "";
+        $ForStaff = "";
+        $UnitID = "";
+        $SubUnitID = "";
     }
     ?>
 
@@ -73,7 +99,7 @@
 <div class="col-2" ></div>
 <div class="col-8" >
     
-    <form id=f2 name=f2 method="post">
+    <form id=f2 name=f2 method="Get">
             <?
                 if(isset($_REQUEST["id"]))
                     echo "<input type=hidden id=id name=id value='".$_REQUEST["id"]."'>";
@@ -161,7 +187,7 @@
                 <td nowrap>
                     <?echo manage_EventUnits::CreateUnitSelectOptions("UnitID",$UnitID);?>
                 </td>
-        </td>
+            </td>
             </tr>
             <tr>
                 <td width="1%" nowrap>
@@ -171,6 +197,19 @@
                     <span id="SpanSubUnitID">
                         <?echo manage_EventUnits::CreateSubUnitSelectOptions("SubUnitID", $UnitID ,$SubUnitID);?>
                     </span>
+                </td>
+            </tr>
+            <tr>
+                <td width="1%" nowrap> 
+                    <b>گروه هدف</b>
+                </td>
+                <td nowrap>
+                <input type="checkbox" id="ForProf" name="ForProf" value="اساتید" <?php if($ForProf == "YES") echo "checked"; ?>>
+                    <label for="ForProf">اساتید</label><br>
+                <input type="checkbox" id="ForStudent" name="ForStudent" value="دانشجویان" <?php if($ForStudent == "YES") echo "checked"; ?>>
+                    <label for="ForStudent">دانشجویان</label><br>
+                <input type="checkbox" id="ForStaff" name="ForStaff" value="کارمندان" <?php if($ForStaff == "YES") echo "checked"; ?>>
+                    <label for="ForStaff">کارمندان</label>
                 </td>
             </tr>
             <tr class="FooterOfTable">

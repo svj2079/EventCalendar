@@ -1,7 +1,17 @@
 <?php
     include "header.inc.php";
     include "classes/EventAccess.class.php";
+    //include "classes/EventAccess.class.php";
     HTMLBegin(); 
+
+
+    /*if (isset($_REQUEST["GetPersons"]))
+    {
+        echo manage_EventAccess::GetPersons($_REQUEST["GetPersons"]);
+        die();
+    }*/
+
+
     
     if(isset($_REQUEST["PersonID"]))
     {
@@ -128,4 +138,24 @@
 	{
 		document.f2.submit();
 	}
+
+    /*function SetPersons()
+    {
+        
+        PersonName = document.getElementById('PersonName');
+        console.log(PersonName.value);
+        if (PersonName.value.length < 3)
+        {
+            document.getElementById ('SpanPersonID').innerHTML = "<select id = 'PersonID' name = 'PersonID'></select>";
+            return;
+        }
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById ('SpanPersonID').innerHTML = "<select id = 'PersonID' name = 'PersonID'>"+this.responseText+"</select>";
+            }
+        };
+        xmlhttp.open("GET", "ManageEventAccess.php?GetPersons="+PersonName.value, true);
+        xmlhttp.send(); 
+    }*/
 </script>

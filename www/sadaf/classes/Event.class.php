@@ -16,6 +16,11 @@
         public $CreatorID;
         public $EventTypeID;
         public $title;
+        public $ForProf;
+        public $ForStudent;
+        public $ForStaff;
+        public $UnitID;
+        public $SubUnitID;
 
         function LoadDataFromDatabase($RecID)
         {
@@ -44,27 +49,32 @@
                 $this->CreatorID=$rec["CreatorID"];
                 $this->EventTypeID=$rec["EventTypeID"];
                 $this->title=$rec["title"];
+                $this->ForProf=$rec["ForProf"];
+                $this->ForStudent=$rec["ForStudent"];
+                $this->ForStaff=$rec["ForStaff"];
+                $this->UnitID=$rec["UnitID"];
+                $this->SubUnitID=$rec["SubUnitID"];
             }
         }
     }
 
     class manage_Event
     {
-        static function Add($StartTime,$EndTime,$description,$level,$CreatorID,$EventTypeID,$title)
+        static function Add($StartTime,$EndTime,$description,$level,$CreatorID,$EventTypeID,$title,$ForProf,$ForStudent,$ForStaff,$UnitID,$SubUnitID)
         {
             $mysql = pdodb::getInstance();
-            $query = "insert into EventCalendar.events (StartTime,EndTime,description,level,CreatorID,EventTypeID,title) values (?,?,?,?,?,?,?)";
+            $query = "insert into EventCalendar.events (StartTime,EndTime,description,level,CreatorID,EventTypeID,title,ForProf,ForStudent,ForStaff,UnitID,SubUnitID) values (?,?,?,?,?,?,?,?,?,?,?,?)";
             $mysql->Prepare($query);
-            $mysql->ExecuteStatement(array($StartTime,$EndTime,$description,$level,$CreatorID,$EventTypeID,$title));
+            $mysql->ExecuteStatement(array($StartTime,$EndTime,$description,$level,$CreatorID,$EventTypeID,$title,$ForProf,$ForStudent,$ForStaff,$UnitID,$SubUnitID));
             return true;
         }
 
-        static function Update($id,$StartTime,$EndTime,$description,$level,$CreatorID,$EventTypeID,$title)
+        static function Update($id,$StartTime,$EndTime,$description,$level,$EventTypeID,$title,$ForProf,$ForStudent,$ForStaff,$UnitID,$SubUnitID)
         {
             $mysql = pdodb::getInstance();
-            $query = "update EventCalendar.events set StartTime=?, EndTime=?, description=?, level=?, CreatorID=?, EventTypeID=?, title=? where id=?";
+            $query = "update EventCalendar.events set StartTime=?, EndTime=?, description=?, level=?, EventTypeID=?, title=?, ForProf=?, ForStudent=?, ForStaff=?, UnitID=?, SubUnitID=? where id=?";
             $mysql->Prepare($query);
-            $mysql->ExecuteStatement(array($StartTime,$EndTime,$description,$level,$CreatorID,$EventTypeID, $title, $id));
+            $mysql->ExecuteStatement(array($StartTime,$EndTime,$description,$level,$EventTypeID, $title,$ForProf,$ForStudent,$ForStaff,$UnitID,$SubUnitID, $id));
             return true;
         }
 
@@ -102,7 +112,11 @@
                 $ret[$k]->CreatorID=$rec["CreatorID"];
                 $ret[$k]->EventTypeID=$rec["EventTypeID"];
                 $ret[$k]->title=$rec["title"]; 
-                
+                $ret[$k]->ForProf=$rec["ForProf"];
+                $ret[$k]->ForStudent=$rec["ForStudent"];
+                $ret[$k]->ForStaff=$rec["ForStaff"];
+                $ret[$k]->UnitID=$rec["UnitID"];
+                $ret[$k]->SubUnitID=$rec["SubUnitID"];
                 $k++;
     
             }

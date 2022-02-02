@@ -54,7 +54,7 @@
     نام و نام خانوادگی
         </td>
         <td nowrap>
-            <input class="form-control sadaf-m-input" type="text" name="PersonName" id="PersonName" maxlength="45" onchange="javascript: SetPersons()">
+            <input class="form-control sadaf-m-input" type="text" name="PersonName" id="PersonName" maxlength="45" oninput="javascript: SetPersons()">
             <span id="SpanPersonID"></span>
         </td>
     </tr>
@@ -95,7 +95,7 @@
                 echo "</td>";
 
                 echo "<td>";
-                echo $res[$i]->PersonID;
+                echo $res[$i]->FullName;
                 echo "</td>";
                 echo "</tr>";
             }
@@ -122,6 +122,9 @@
 
     function SetPersons()
     {
+        
+        document.getElementById ('SpanPersonID').innerHTML = "<img src='images/input-spinner.gif'>";
+        console.log("<img src='images/input-spinner.gif'>");
         
         PersonName = document.getElementById('PersonName');
         console.log(PersonName.value);
