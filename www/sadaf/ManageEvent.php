@@ -57,11 +57,6 @@
                         echo "</a>";
                         echo "</td>";
                         echo "<td>";
-                        echo "<a href='ManageEventUnits.php?EventID=".$id."'>";
-                        echo "واحدهای مرتبط";
-                        echo "</a>";
-                        echo "</td>";
-                        echo "<td>";
                         echo "<a href='ManageEventTasks.php?EventID=".$id."'>";
                         echo "چک لیست";
                         echo "</a>";

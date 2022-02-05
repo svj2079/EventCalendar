@@ -76,12 +76,36 @@
         } 
 
 
-        static function GetList()
+        static function CheckUserAccessToThisEvent ($EventID, $PersonID)
         {
             $mysql = pdodb::getInstance();
-            $query = "select * from EventCalendar.EventAccess";
+            $query = "select * from EventAccess where PersonID=? and EvetnID=?";
             $mysql->Prepare($query);
-            $res = $mysql->ExecuteStatement(array());
+            $res = $mysql->ExecuteStatement(array($PersonID,$EventID));
+            if ($rec = $res->fetch())
+                return $AccessType;
+            else
+            {
+                $query = "select events.CreatorID from events where id=?";
+                $mysql->Prepare($query);
+                $res = $mysql->ExecuteStatement(array($EventID));
+                if ($rec = $res->fetch())
+                    if($rec["CreatorID"]==$PersonID)
+                        return "WRITE";
+           }
+           return "NONE";
+        }
+
+
+        static function GetList($EventID)
+        {
+            $mysql = pdodb::getInstance();
+            $query = "select id, EventAccess.PersonID, AccessType, EventID, concat(pfname,' ', plname) as FullName from EventCalendar.EventAccess 
+            join hrmstotal.persons on (EventAccess.PersonID=persons.PersonID) 
+            join hrmstotal.staff on (persons.PersonID = staff.PersonID and persons.person_type = staff.person_type)
+                            where EventAccess.EventID =?";
+            $mysql->Prepare($query);
+            $res = $mysql->ExecuteStatement(array($EventID));
             $k = 0;
             while($rec = $res->fetch())
             {
@@ -90,6 +114,7 @@
                 $ret[$k]->PersonID=$rec["PersonID"];
                 $ret[$k]->AccessType=$rec["AccessType"];
                 $ret[$k]->EventID=$ret["EventID"];
+                $ret[$k]->FullName=$rec["FullName"];
                 $k++;
     
             }

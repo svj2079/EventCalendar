@@ -1,24 +1,27 @@
 <?php
     include "header.inc.php";
     include "classes/EventAccess.class.php";
-    //include "classes/EventAccess.class.php";
     HTMLBegin(); 
 
+    /*if(isset($_REQUEST["PersonID"]))
+    {
+        echo manage_EventAccess::CheckUserAccessToThisEvent($EventID,$PersonID);
+    }*/
 
-    /*if (isset($_REQUEST["GetPersons"]))
+    if (isset($_REQUEST["GetPersons"]))
     {
         echo manage_EventAccess::GetPersons($_REQUEST["GetPersons"]);
         die();
-    }*/
+    }
 
-
+    $EventID=$_REQUEST["EventID"];
     
     if(isset($_REQUEST["PersonID"]))
     {
         if(isset($_REQUEST["id"]))
-            manage_EventTypes::Update($_REQUEST["id"], $_REQUEST["PersonID"], $_REQUEST["AccessType"], $_REQUEST["EventID"]);
+            manage_EventAccess::Update($_REQUEST["id"], $_REQUEST["PersonID"], $_REQUEST["AccessType"], $EventID);
         else
-            manage_EventTypes::Add($_REQUEST["PersonID"], $_REQUEST["AccessType"], $_REQUEST["EventID"]);
+            manage_EventAccess::Add($_REQUEST["PersonID"], $_REQUEST["AccessType"], $EventID);
     }
     if(isset($_REQUEST["id"]))
     {
@@ -26,13 +29,11 @@
         $obj->LoadDataFromDatabase($_REQUEST["id"]);
         $PersonID = $obj->PersonID;
         $AccessType = $obj->AccessType;
-        $EventID = $obj->EventID;
     }
     else
     {
         $PersonID = "";
         $AccessType = "";
-        $EventID = "";
     }
     ?>
 
@@ -46,6 +47,7 @@
         if(isset($_REQUEST["id"]))
             echo "<input type=hidden id=id name=id value='".$_REQUEST["id"]."'>";
     ?>
+    <input type=hidden id=EventID name=EventID value='<? echo $EventID?>'>
     <table class="table table-sm table-stripped table-bordered">
     <tr class="HeaderOfTable">
     <td align="center">ایجاد/ویرایش نوع دسترسی</td>
@@ -55,13 +57,21 @@
     <table width="100%" border="0">
     <tr>
         <td width="1%" nowrap>
+    نام و نام خانوادگی
+        </td>
+        <td nowrap>
+            <input class="form-control sadaf-m-input" type="text" name="PersonName" id="PersonName" maxlength="45" oninput="javascript: SetPersons()">
+            <span id="SpanPersonID"></span>
+        </td>
+    </tr>
+    <tr>
+        <td width="1%" nowrap>
     نوع دسترسی
         </td>
         <td nowrap>
               <select name="AccessType" id="AccessType">
-                <option id="NONE">None</option>
-                <option <? if($AccessType =="Write") echo"selected" ?> id="Write">Write</option>
-                <option <? if($AccessType =="Read") echo"selected" ?> id="Read">Read</option>
+                <option <? if($AccessType =="WRITE") echo"selected" ?> value="WRITE">کامل</option>
+                <option <? if($AccessType =="READ") echo"selected" ?> value="READ">فقط خواندنی</option>
               </select>
         </td>
     </tr>
@@ -76,13 +86,15 @@
 
 
 <form id=f1 name=f1 method=post>
+<input type=hidden id=EventID name=EventID value='<? echo $EventID?>'>
 <table class="table table-sm table-stripped table-bordered">
-    <thead>
+<thead>
         <td>&nbsp;</td>
-        <td>شرح</td>
+        <td>نام و نام خانوادگی</td>
+        <td>نوع دسترسی</td>
     </thead>
     <?
-        $res = manage_EventAccess::GetList();
+        $res = manage_EventAccess::GetList($EventID);
         if ($res != null)
         for($i=0; $i<count($res); $i++)
         {
@@ -94,7 +106,6 @@
             }
             else
             {
-                
                 echo "<tr>";
 
                 echo "<td>";
@@ -102,26 +113,21 @@
                 echo "</td>";
 
                 echo "<td>";
-                echo "<a href='ManageEventTypes.php?id=".$id."'>";
-                echo $res[$i]->AccessType;
-                echo "</a>";
+                echo $res[$i]->FullName;
                 echo "</td>";
                 echo "<td>";
-                echo "<a href='ManageEventTypes.php?id=".$id."'>";
-                echo $res[$i]->PersonID;
-                echo "</a>";
-                echo "</td>";
-                echo "<td>";
-                echo "<a href='ManageEventTypes.php?id=".$id."'>";
-                echo $res[$i]->EventID;
-                echo "</a>";
+                //echo "<a href='ManageEventAccess.php?id=".$id."&EventID=".$_REQUEST['EventID']."'>";
+                if($res[$i]->AccessType == "WRITE") echo "کامل"; 
+                else echo "فقط خواندنی";
+                //echo "</a>";
                 echo "</td>";
                 echo "</tr>";
+
             }
         }
     ?>
     <tr class="FooterOfTable">
-        <td colspan=2 align="center">
+        <td colspan=4 align="center">
             <input type=button class="btn btn-danger" value="حذف" onclick="if(confirm('آیا مطمئن هستید')) document.f1.submit();">
         </td>
     </tr>
@@ -139,7 +145,7 @@
 		document.f2.submit();
 	}
 
-    /*function SetPersons()
+    function SetPersons()
     {
         
         PersonName = document.getElementById('PersonName');
@@ -157,5 +163,5 @@
         };
         xmlhttp.open("GET", "ManageEventAccess.php?GetPersons="+PersonName.value, true);
         xmlhttp.send(); 
-    }*/
+    }
 </script>

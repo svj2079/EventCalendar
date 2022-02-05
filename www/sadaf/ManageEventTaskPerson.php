@@ -18,7 +18,7 @@
     if(isset($_REQUEST["PersonID"]))
     {
         if(isset($_REQUEST["id"]))
-            manage_EventTaskPerson::Update($_REQUEST["id"], $EventTaskID,$_REQUEST["PersonID"]);
+            manage_EventTaskPerson::Update($_REQUEST["id"], $EventTaskID, $_REQUEST["PersonID"]);
         else
             manage_EventTaskPerson::Add($EventTaskID,$_REQUEST["PersonID"]);
     }

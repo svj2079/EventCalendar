@@ -67,6 +67,7 @@
             $mysql->Prepare($query);
             $mysql->ExecuteStatement(array($StartTime,$EndTime,$description,$level,$CreatorID,$EventTypeID,$title,$ForProf,$ForStudent,$ForStaff,$UnitID,$SubUnitID));
             return true;
+
         }
 
         static function Update($id,$StartTime,$EndTime,$description,$level,$EventTypeID,$title,$ForProf,$ForStudent,$ForStaff,$UnitID,$SubUnitID)

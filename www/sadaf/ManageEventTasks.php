@@ -62,10 +62,10 @@
         </td>
         <td nowrap>
             <select name="level" id="level">
-                <option <? if($level =="1") echo"selected" ?> id="1">1</option>
-                <option <? if($level =="2") echo"selected" ?> id="2">2</option>
-                <option <? if($level =="3") echo"selected" ?> id="3">3</option>
-                <option <? if($level =="4") echo"selected" ?> id="4">4</option>
+                <option <? if($level =="1") echo"selected" ?> value="1">1</option>
+                <option <? if($level =="2") echo"selected" ?> value="2">2</option>
+                <option <? if($level =="3") echo"selected" ?> value="3">3</option>
+                <option <? if($level =="4") echo"selected" ?> value="4">4</option>
             </select>
         </td>
     </tr>
@@ -76,9 +76,9 @@
         <td nowrap>
               <select name="NotificationType" id="NotificationType">
                 <option id="NONE">None</option>
-                <option <? if($NotificationType =="EMAIL") echo"selected" ?> id="EMAIL">Email</option>
-                <option <? if($NotificationType =="SMS") echo"selected" ?> id="SMS">SMS</option>
-                <option <? if($NotificationType =="PORTAL") echo"selected" ?> id="PORTAL">Portal</option>
+                <option <? if($NotificationType =="EMAIL") echo"selected" ?> value="EMAIL">Email</option>
+                <option <? if($NotificationType =="SMS") echo"selected" ?> value="SMS">SMS</option>
+                <option <? if($NotificationType =="PORTAL") echo"selected" ?> value="PORTAL">Portal</option>
               </select>
         </td>
     </tr>

@@ -2,8 +2,6 @@
 
 function ShowCalendar($FromMonth=1)
 {
-    //echo "1";
-    //die();
 
     $now = date("Ymd");
     $yy = substr($now,0,4);
@@ -40,7 +38,7 @@ function ShowCalendar($FromMonth=1)
             $list .= "<td width=3% align=center>&nbsp;</td>";
         }
 
-        for($day=1; $day<31; $day++)
+        for($day=1; $day<31; $day++) 
         {
             $list .= CreateDayCellInCalendar($CurYear, $month, $day, $dd, $mm);
             if(($day+$FirstDayLoc-1)%7==0)

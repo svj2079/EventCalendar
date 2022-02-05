@@ -92,7 +92,9 @@
         $UnitID = "";
         $SubUnitID = "";
     }
+    
     ?>
+
 
 <div class="container-fluid">
 <div class="row">
@@ -140,7 +142,7 @@
                     <b>تاریخ شروع رویداد</b>
                 </td>
                 <td nowrap>
-                    <input class="form-control sadaf-m-input" type="text" name="StartDate" id="StartDate" maxlength="45" placeholder="yyyy/mm/dd" value="<? echo $ShStartDate ?>"> 
+                    <input class="form-control sadaf-m-input" type="text" name="StartDate" id="StartDate" maxlength="45" placeholder="yyyy/mm/dd" value="<? echo $ShStartDate ?>">
                 </td>
             </tr>
             <tr>
@@ -173,10 +175,10 @@
                 </td>
                 <td nowrap>
                     <select name="level" id="level">
-                        <option <? if($level =="1") echo"selected" ?> id="1">1</option>
-                        <option <? if($level =="2") echo"selected" ?> id="2">2</option>
-                        <option <? if($level =="3") echo"selected" ?> id="3">3</option>
-                        <option <? if($level =="4") echo"selected" ?> id="4">4</option>
+                        <option <? if($level =="1") echo"selected" ?> value="1">1</option>
+                        <option <? if($level =="2") echo"selected" ?> value="2">2</option>
+                        <option <? if($level =="3") echo"selected" ?> value="3">3</option>
+                        <option <? if($level =="4") echo"selected" ?> value="4">4</option>
                     </select>
                 </td>
             </tr>
