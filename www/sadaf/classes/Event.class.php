@@ -89,9 +89,11 @@
 
         static function GetList()
         {
-            
+            $ItemsCount = 10;
+            $FromRec = 0;
+                        
             $mysql = pdodb::getInstance();
-            $query = "select *,sadaf.g2j(StartTime) as ShStartDate, sadaf.g2j(EndTime) as ShEndDate from EventCalendar.events";
+            $query = "select *,sadaf.g2j(StartTime) as ShStartDate, sadaf.g2j(EndTime) as ShEndDate from EventCalendar.events limit $FromRec, $ItemsCount";
             $mysql->Prepare($query);
             $res = $mysql->ExecuteStatement(array());
             $k = 0;
