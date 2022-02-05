@@ -60,7 +60,7 @@
     ?>
     <table class="table table-sm table-stripped table-bordered">
     <tr class="HeaderOfTable">
-    <td align="center">واحدهای مرتبط</td>
+    <td align="center"><b>واحدهای مرتبط</b></td>
     </tr>
     </table>
 </form>
@@ -69,8 +69,12 @@
 <table class="table table-sm table-stripped table-bordered">
     <thead>
         <td>&nbsp;</td>
-        <td>واحد سازمانی</td>
-        <td>زیر واحد سازمانی</td>
+        <td>
+            <b>واحد سازمانی</b>
+        </td>
+        <td>
+            <b>زیر واحد سازمانی</b>
+        </td>
     </thead>
     <?
         $res = manage_EventUnits::GetList();

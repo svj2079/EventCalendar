@@ -31,14 +31,14 @@
     ?>
     <table class="table table-sm table-stripped table-bordered">
     <tr class="HeaderOfTable">
-    <td align="center">ایجاد/ویرایش نوع رویداد</td>
+    <td align="center"><b>ایجاد/ویرایش نوع رویداد</b></td>
     </tr>
     <tr>
     <td>
     <table width="100%" border="0">
     <tr>
         <td width="1%" nowrap>
-    عنوان
+            <b>عنوان</b>
         </td>
         <td nowrap>
         <input class="form-control sadaf-m-input" type="text" name="description" id="description" maxlength="45" value="<? echo $description ?>">
@@ -58,7 +58,9 @@
 <table class="table table-sm table-stripped table-bordered">
     <thead>
         <td>&nbsp;</td>
-        <td>شرح</td>
+        <td>
+            <b>شرح</b>
+        </td>
     </thead>
     <?
         $res = manage_EventTypes::GetList();

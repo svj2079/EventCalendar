@@ -88,6 +88,53 @@
             return true;
         }
 
+
+        static function Search($title, $FromDate , $ToDate)
+        {
+            $condArray = array();
+            array_push($condArray, "%".$title."%");
+            $mysql = pdodb::getInstance();
+            $query = "select *,sadaf.g2j(StartTime) as ShStartDate, sadaf.g2j(EndTime) as ShEndDate from EventCalendar.events where title like ? ";
+            if ($FromDate != "")
+            {
+             $query .= " and StartTime>=? ";
+             array_push($condArray, $FromDate);
+            }
+            if ($ToDate != "")
+            {
+             $query .= " and StartTime <=?";
+             array_push($condArray, $ToDate);
+            }
+            $mysql->Prepare($query);
+            
+            
+            $res = $mysql->ExecuteStatement($condArray);
+            $k = 0;
+            $ret = [];
+            while($rec = $res->fetch())
+            {
+                $ret[$k] = new be_Event();
+                $ret[$k]->id=$rec["id"];
+                $ret[$k]->ShStartDate=$rec["ShStartDate"];
+                $ret[$k]->ShEndDate=$rec["ShEndDate"];
+                $ret[$k]->description=$rec["description"];
+                $ret[$k]->level=$rec["level"];
+                $ret[$k]->CreatorID=$rec["CreatorID"];
+                $ret[$k]->EventTypeID=$rec["EventTypeID"];
+                $ret[$k]->title=$rec["title"]; 
+                $ret[$k]->ForProf=$rec["ForProf"];
+                $ret[$k]->ForStudent=$rec["ForStudent"];
+                $ret[$k]->ForStaff=$rec["ForStaff"];
+                $ret[$k]->UnitID=$rec["UnitID"];
+                $ret[$k]->SubUnitID=$rec["SubUnitID"];
+                $k++;
+
+            }
+            return $ret;
+
+        }
+
+
         static function GetList()
         {
             $ItemsCount = 10;

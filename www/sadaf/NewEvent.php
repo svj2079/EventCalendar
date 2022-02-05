@@ -34,12 +34,33 @@
         {
             $ForStaff="YES";
         }
+
+        $StartHour = $_REQUEST["StartHour"];
+        if($StartHour == "")
+        {
+            $StartHour = 0;
+        }
+        $StartMinute = $_REQUEST["StartMinute"];
+        if($StartMinute == "")
+        {
+            $StartMinute = 0;
+        }
        
         $s=xdate($_REQUEST["StartDate"]);
-        $s= substr($s , 0 , 4)."-".substr($s , 4 , 2)."-".substr($s , 6 ,2)." ".$_REQUEST["StartHour"].":".$_REQUEST["StartMinute"];
+        $s= substr($s , 0 , 4)."-".substr($s , 4 , 2)."-".substr($s , 6 ,2)." ".$StartHour.":".$StartMinute;
 
+        $EndHour = $_REQUEST["EndHour"];
+        if ($EndHour == "")
+        {
+            $EndHour = 23;
+        }
+        $EndMinute = $_REQUEST["EndMinute"];
+        if ($EndMinute == "")
+        {
+            $EndMinute = 59;
+        }
         $e=xdate($_REQUEST["EndDate"]);
-        $e= substr($e , 0 , 4)."-".substr($e , 4 , 2)."-".substr($e , 6 ,2)." ".$_REQUEST["EndHour"].":".$_REQUEST["EndMinute"];
+        $e= substr($e , 0 , 4)."-".substr($e , 4 , 2)."-".substr($e , 6 ,2)." ".$EndHour.":".$EndMinute;
 
         if(isset($_REQUEST["id"]))
             manage_Event::Update($_REQUEST["id"], $s, $e, $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["EventTypeID"], $_REQUEST["title"], $ForProf, $ForStudent, $ForStaff, $_REQUEST["UnitID"], $_REQUEST["SubUnitID"]);
@@ -108,17 +129,18 @@
             ?>
         <table class="table table-sm table-stripped table-bordered">
             <tr class="HeaderOfTable">
-                <td align="center">ایجاد/ویرایش رویداد</td>
+                <td align="center"><b>ایجاد/ویرایش رویداد</b></td>
             </tr>
             <tr>
                 <td>
                     <table width="100%" border="0">
                 <tr>
                 <td width="1%" nowrap>
+                    <span style="color: red;">*</span>
                     <b>عنوان</b>
                 </td>
                 <td nowrap>
-                    <input class="form-control sadaf-m-input" type="text" name="title" id="title" maxlength="45" value="<? echo $title ?>">
+                    <input required class="form-control sadaf-m-input" type="text" name="title" id="title" maxlength="45" value="<? echo $title ?>">
                 </td>
             </tr>
             <tr>
@@ -139,6 +161,7 @@
             </tr>
             <tr>
                 <td width="1%" nowrap>
+                    <span style="color: red;">*</span>
                     <b>تاریخ شروع رویداد</b>
                 </td>
                 <td nowrap>
@@ -155,6 +178,7 @@
             </tr>
             <tr>
                 <td width="1%" nowrap>
+                    <span style="color: red;">*</span>
                     <b>تاریخ پایان رویداد</b>
                 </td>
                 <td nowrap>
@@ -231,7 +255,23 @@
 <script>
 	function ValidateForm()
 	{
+        if(document.getElementById('title').value == "")
+        {
+            alert("لطفا عنوان را وارد کنید");
+            return;
+        }
+        if(document.getElementById('StartDate').value == "")
+        {
+            alert("لطفا تاریخ شروع را وارد کنید");
+            return;
+        }
+        if(document.getElementById('EndDate').value == "")
+        {
+            alert("لطفا تاریخ پایان را وارد کنید");
+            return;
+        }
 		document.f2.submit();
+    
 	}
 
     function SetUnit()

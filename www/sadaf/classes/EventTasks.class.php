@@ -29,7 +29,6 @@
     {
         static function Add($description, $level, $NotificationType , $EventID)
         {
-            echo "++++";
             $mysql = pdodb::getInstance();
             $query = "insert into EventCalendar.EventTasks (description, level, NotificationType, EventID) values (?, ?, ?, ?)";
             $mysql->Prepare($query);

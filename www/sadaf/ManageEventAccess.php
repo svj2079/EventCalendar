@@ -50,14 +50,14 @@
     <input type=hidden id=EventID name=EventID value='<? echo $EventID?>'>
     <table class="table table-sm table-stripped table-bordered">
     <tr class="HeaderOfTable">
-    <td align="center">ایجاد/ویرایش نوع دسترسی</td>
+    <td align="center"><b>ایجاد/ویرایش نوع دسترسی</b></td>
     </tr>
     <tr>
     <td>
     <table width="100%" border="0">
     <tr>
         <td width="1%" nowrap>
-    نام و نام خانوادگی
+            <b>نام و نام خانوادگی</b>
         </td>
         <td nowrap>
             <input class="form-control sadaf-m-input" type="text" name="PersonName" id="PersonName" maxlength="45" oninput="javascript: SetPersons()">
@@ -66,7 +66,7 @@
     </tr>
     <tr>
         <td width="1%" nowrap>
-    نوع دسترسی
+            <b>نوع دسترسی</b>
         </td>
         <td nowrap>
               <select name="AccessType" id="AccessType">
@@ -90,8 +90,12 @@
 <table class="table table-sm table-stripped table-bordered">
 <thead>
         <td>&nbsp;</td>
-        <td>نام و نام خانوادگی</td>
-        <td>نوع دسترسی</td>
+        <td>
+            <b>نام و نام خانوادگی</b>
+        </td>
+        <td>
+            <b>نوع دسترسی</b>
+        </td>
     </thead>
     <?
         $res = manage_EventAccess::GetList($EventID);

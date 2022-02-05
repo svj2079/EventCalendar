@@ -43,14 +43,15 @@
     ?>
     <table class="table table-sm table-stripped table-bordered">
     <tr class="HeaderOfTable">
-    <td align="center">ایجاد/ویرایش فعالیت های رویداد</td>
+    <td align="center"><b>ایجاد/ویرایش فعالیت های رویداد</b></td>
     </tr>
     <tr>
     <td>
     <table width="100%" border="0">
     <tr>
         <td width="1%" nowrap>
-    عنوان
+            <span style="color: red;">*</span>
+            <b>عنوان</b>
         </td>
         <td nowrap>
         <input class="form-control sadaf-m-input" type="text" name="description" id="description" maxlength="45" value="<? echo $description ?>">
@@ -58,7 +59,7 @@
     </tr>
     <tr>
         <td width="1%" nowrap>
-    سطح اهمیت
+            <b>سطح اهمیت</b>
         </td>
         <td nowrap>
             <select name="level" id="level">
@@ -71,7 +72,7 @@
     </tr>
     <tr>
         <td width="1%" nowrap>
-    نوع اطلاع رسانی
+            <b>نوع اطلاع رسانی</b>
         </td>
         <td nowrap>
               <select name="NotificationType" id="NotificationType">
@@ -97,10 +98,18 @@
 <table class="table table-sm table-stripped table-bordered">
     <thead>
         <td>&nbsp;</td>
-        <td>شرح</td>
-        <td>سطح اهمیت</td>
-        <td>نوع اطلاع رسانی</td>
-        <td>مجریان</td>
+        <td>
+            <b>شرح</b>
+        </td>
+        <td>
+            <b>سطح اهمیت</b>
+        </td>
+        <td>
+            <b>نوع اطلاع رسانی</b>
+        </td>
+        <td>
+            <b>مجریان</b>
+        </td>
     </thead>
     <?
         $res = manage_EventTasks::GetList($_REQUEST["EventID"]);
@@ -156,6 +165,11 @@
 <script>
 	function ValidateForm()
 	{
+        if(document.getElementById('description').value == "")
+        {
+            alert("لطفا عنوان را وارد کنید");
+            return;
+        }
 		document.f2.submit();
 	}
 </script>

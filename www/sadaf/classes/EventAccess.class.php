@@ -63,13 +63,15 @@
             $mysql = pdodb::getInstance();
             $query = "select * from hrmstotal.persons join hrmstotal.staff on(
                 persons.PersonID = staff.PersonID and persons.person_type = staff.person_type)
-                where concat(pfname,'',plname) like ?";
+                join baseinfo.UmStructure on (UmStructure.StructID = staff.UnitCode)
+                where concat(pfname,' ',plname) like ?
+                order by plname,pfname";
             $mysql->Prepare($query);
             $res = $mysql->ExecuteStatement(array("%".$PersonName."%"));
             $ret="";
             while($rec = $res->fetch())
             {
-                $ret.="<option value='".$rec["PersonID"]."'>".$rec["pfname"]." ".$rec["plname"]."</option>";
+                $ret.="<option value='".$rec["PersonID"]."'>".$rec["plname"]." ".$rec["pfname"]." (".$rec["StructTitle"].")</option>";
             }
             return $ret;
 
