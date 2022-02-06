@@ -141,7 +141,7 @@
                 echo "</td>";
                 echo "<td>";
                 echo "<a href='ManageEventTaskPerson.php?EventTaskID=".$id."'>";
-                echo "مجریان";
+                echo "<i class='fa fa-user' title='مجریان'></i>";
                 echo "</a>";
                 echo "</td>";
                 echo "</tr>";

@@ -83,7 +83,28 @@
     <form id=f1 name=f1 method=post>
         <table class="table table-sm table-stripped table-bordered">
             <tr class="HeaderOfTable">
-                <td align="center" colspan="8"><b>رویدادها</b></td>
+                <td align="center" colspan="8">
+                    <b>رویدادها</b>
+                </td>
+            </tr>
+            <tr>
+                    <td>&nbsp;</td>
+                    <td>
+                        <b>عنوان</b>
+                    </td>
+                    <td>
+                        <b>تاریخ شروع</b>
+                    </td>
+                    <td>
+                        <b>تاریخ پایان</b>
+                    </td>
+                    <td>
+                        <b>مدیران</b>
+                    </td>
+                    <td>
+                        <b>چک لیست</b>
+                    </td>
+                
             </tr>
 
             <?
@@ -122,12 +143,12 @@
                         echo "</td>";
                         echo "<td>";
                         echo "<a href='ManageEventAccess.php?EventID=".$id."'>";
-                        echo "مدیران";
+                        echo "<i class='fa fa-users' title='مدیران'></i>";
                         echo "</a>";
                         echo "</td>";
                         echo "<td>";
                         echo "<a href='ManageEventTasks.php?EventID=".$id."'>";
-                        echo "چک لیست";
+                        echo "<i class='fa fa-tasks' title='چک لیست'></i>";
                         echo "</a>";
                         echo "</td>";
                         echo "</tr>";
@@ -151,12 +172,10 @@
                         $FromRec = $_REQUEST["FromRec"];
                 }
 
-                $mysql = pdodb::getInstance();
-                $query = "select count(*) as tcount from EventCalendar.events";
-                $mysql->Prepare($query);
-                $res = $mysql->ExecuteStatement(array($query));
-                $rec = $res->fetch();
-                $TotalCount = $rec["tcount"];
+                if(isset($_REQUEST["title"]))
+                    $TotalCount = manage_Event::GetCountSearch($title, $FromDate, $ToDate);
+                else
+                    $TotalCount = manage_Event::GetCount();
                 for ($p=1 ; $p <= ceil($TotalCount/$ItemsCount) ; $p++)
                 {
                     if(($p-1) * $ItemsCount != $FromRec)

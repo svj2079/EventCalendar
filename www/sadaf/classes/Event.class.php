@@ -172,6 +172,41 @@
             }
             return $ret;                
         }
+
+
+        static function GetCount()
+        {
+            $mysql = pdodb::getInstance();
+            $query = "select count(*) as tcount from EventCalendar.events";
+            $mysql->Prepare($query);
+            $res = $mysql->ExecuteStatement(array($query));
+            $rec = $res->fetch();
+            return $rec["tcount"];
+        }
+
+        static function GetCountSearch($title, $FromDate , $ToDate)
+        
+        {
+            $condArray = array();
+            array_push($condArray, "%".$title."%");
+            $mysql = pdodb::getInstance();
+            $query = "select count(*) as tcount from EventCalendar.events where title like ? ";
+            if ($FromDate != "")
+            {
+             $query .= " and StartTime>=? ";
+             array_push($condArray, $FromDate);
+            }
+            if ($ToDate != "")
+            {
+             $query .= " and StartTime <=?";
+             array_push($condArray, $ToDate);
+            }
+            $mysql->Prepare($query);
+            $res = $mysql->ExecuteStatement($condArray);
+            $rec = $res->fetch();
+            return $rec["tcount"];
+        }
+
     }
 
 ?>
