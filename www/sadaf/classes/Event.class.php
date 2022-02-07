@@ -135,15 +135,25 @@
         }
 
 
-        static function GetList()
+
+        static function GetList($CurDate = "")
         {
             $ItemsCount = 10;
             $FromRec = 0;
                         
             $mysql = pdodb::getInstance();
-            $query = "select *,sadaf.g2j(StartTime) as ShStartDate, sadaf.g2j(EndTime) as ShEndDate from EventCalendar.events limit $FromRec, $ItemsCount";
+            if($CurDate=="")
+                $query = "select *,sadaf.g2j(StartTime) as ShStartDate, sadaf.g2j(EndTime) as ShEndDate from EventCalendar.events limit $FromRec, $ItemsCount";
+            else
+                $query = "select *,sadaf.g2j(StartTime) as ShStartDate, sadaf.g2j(EndTime) as ShEndDate , s1.StructTitle as UnitName, s2.StructTitle as SubUnitName from EventCalendar.events 
+                left join baseinfo.UmStructure s1 on (events.UnitID = s1.StructID)
+                left join baseinfo.UmStructure s2 on (events.SubUnitID = s2.StructID)
+                where StartTime<=? and EndTime>=?";
             $mysql->Prepare($query);
-            $res = $mysql->ExecuteStatement(array());
+            if($CurDate=="")
+                $res = $mysql->ExecuteStatement(array());
+            else
+                $res = $mysql->ExecuteStatement(array($CurDate, $CurDate));
             $k = 0;
             while($rec = $res->fetch())
             {
@@ -167,6 +177,8 @@
                 $ret[$k]->ForStaff=$rec["ForStaff"];
                 $ret[$k]->UnitID=$rec["UnitID"];
                 $ret[$k]->SubUnitID=$rec["SubUnitID"];
+                $ret[$k]->UnitName=$rec["UnitName"];
+                $ret[$k]->SubUnitName=$rec["SubUnitName"];
                 $k++;
     
             }

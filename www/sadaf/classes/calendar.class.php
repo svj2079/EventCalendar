@@ -1,8 +1,9 @@
 <?php
 
-function ShowCalendar($FromMonth=1)
+function ShowCalendar($SelectedYear)
 {
 
+    $FromMonth=1;
     $now = date("Ymd");
     $yy = substr($now,0,4);
     $mm = substr($now,4,2);
@@ -15,6 +16,7 @@ function ShowCalendar($FromMonth=1)
         $dd = "0".$dd;
     $list = "";
     $CurYear = $yy;
+
 
     $list .= "<tr>";
     for($month=$FromMonth; $month<13; $month++)
@@ -32,7 +34,10 @@ function ShowCalendar($FromMonth=1)
 
         $CurDateMiladi = GetMiladiDate($CurYear, $month, 1);
         $CurDate2  = mktime(0, 0, 0, substr($CurDateMiladi, 4, 2), substr($CurDateMiladi, 6, 2), substr($CurDateMiladi, 0, 4));
-        $FirstDayLoc = FarsiDayNumberInWeek(date("l", $CurDate2));
+
+        $SelectedDateMiladi = GetMiladiDate($SelectedYear, $month, 1);
+        $SelectedDate = mktime(0, 0, 0, substr($SelectedDateMiladi, 4, 2), substr($SelectedDateMiladi, 6, 2), substr($SelectedDateMiladi, 0, 4));
+        $FirstDayLoc = FarsiDayNumberInWeek(date("l", $SelectedDate));
         for($i=1; $i<$FirstDayLoc; $i++)
         {
             $list .= "<td width=3% align=center>&nbsp;</td>";
@@ -40,7 +45,7 @@ function ShowCalendar($FromMonth=1)
 
         for($day=1; $day<31; $day++) 
         {
-            $list .= CreateDayCellInCalendar($CurYear, $month, $day, $dd, $mm);
+            $list .= CreateDayCellInCalendar($SelectedYear, $CurYear, $month, $day, $dd, $mm);
             if(($day+$FirstDayLoc-1)%7==0)
             {
                 $list .= "</tr><tr>";
@@ -50,7 +55,7 @@ function ShowCalendar($FromMonth=1)
         if($month<7)
         {
             $day = 31;
-            $list .= CreateDayCellInCalendar($CurYear, $month, $day, $dd, $mm);
+            $list .= CreateDayCellInCalendar($SelectedYear, $CurYear, $month, $day, $dd, $mm);
             $list .= "</td></tr>";
         }
         else
@@ -165,11 +170,15 @@ function ShowCalendar($FromMonth=1)
     }
 
 
-function CreateDayCellInCalendar($CurYear, $month, $day, $dd, $mm)
+function CreateDayCellInCalendar($SelectedYear, $CurYear, $month, $day, $dd, $mm)
 {
     $list = "";
-    $CurDateMiladi = GetMiladiDate($CurYear, $month, $day);
-    if(IsEndWeekVacation($CurDateMiladi))
+    
+    $SelectedDateMiladi = GetMiladiDate($SelectedYear, $month, $day);
+    
+    $link = "<a href='ShowDateEvents.php?CurDate=".$SelectedDateMiladi."'>";
+
+    if(IsEndWeekVacation($SelectedDateMiladi))
     {
         if($mm==$month && $dd==$day)
             $list .= "<td width=3% align=center bgcolor='#7fff00'><b>".$day."</b></td>";
@@ -183,7 +192,7 @@ function CreateDayCellInCalendar($CurYear, $month, $day, $dd, $mm)
             $list .= "<td width=3% align=center bgcolor='#7fff00' ".$TdStyle.">";
         else {
             
-            $list .= "<td width=3% align=center ".$TdStyle.">";
+            $list .= "<td width=3% align=center ".$TdStyle.">".$link;
         }
         $IsHodiday = false;
         if($IsHodiday)
@@ -194,9 +203,9 @@ function CreateDayCellInCalendar($CurYear, $month, $day, $dd, $mm)
         if($IsHodiday)
             $list .= "</b></span>";
 
+        $list .= "</a>";
         $list .= "</td>";
     }
     return $list;
 }
 
-// .git    شاخه کد    .config
