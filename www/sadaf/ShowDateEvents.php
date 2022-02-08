@@ -12,43 +12,12 @@
 
 <div class="container-fluid">
 <div class="row">
-<div class="col-2" ></div>
-<div class="col-8" >
-
-
 <form id=f1 name=f1 method=post>
         <table class="table table-sm table-stripped table-bordered">
             <tr class="HeaderOfTable">
                 <td align="center" colspan="10">
                     <b>رویداد</b>
                 </td>
-            </tr>
-            <tr>
-                <td>
-                    <b>عنوان</b>
-                </td>
-                <td>
-                    <b>توضیحات</b>
-                </td>
-                <td>
-                    <b>تاریخ شروع</b>
-                </td>
-                <td>
-                    <b>تاریخ پایان</b>
-                </td>
-                <td>
-                    <b>سطح اهمیت</b>
-                </td>
-                <td>
-                    <b>چک لیست</b>
-                </td>
-                <td>
-                    <b>واحد سازمانی</b>
-                </td>
-                <td>
-                    <b>زیر واحد سازمانی</b>
-                </td>
-                
             </tr>
 
             <?  
@@ -58,33 +27,32 @@
                     for($i=0; $i<count($res); $i++)
                     {
                         $id = $res[$i]->id;
-                        manage_Event::GetList($id);
                         
                         echo "<tr>";
                         echo "<td>";
+                        echo "<b>عنوان:</b> ";
                         echo $res[$i]->title; 
-                        echo "</td>";
-                        echo "<td>";
+                        echo "<br>";
+                        echo "<b>توضیحات:</b> ";
                         echo $res[$i]->description; 
-                        echo "</td>";
-                        echo "<td>";
+                        echo "<br>";
+                        echo "<b>ساعت شروع:</b> ";
                         echo $res[$i]->ShStartDate;
-                        echo "</td>";
-                        echo "<td>";
+                        echo "<br>";
+                        echo "<b>ساعت پایان:</b>";
                         echo $res[$i]->ShEndDate;
-                        echo "</td>";
-                        echo "<td>";
+                        echo "<br>";
+                        echo "<b>سطح اهمیت:</b> ";
                         echo $res[$i]->level;
-                        echo "</td>";
-                        echo "<td>";
+                        echo "  ";
                         echo "<a href='ManageEventTasks.php?EventID=".$id."'>";
                         echo "<i class='fa fa-tasks' title='چک لیست'></i>";
                         echo "</a>";
-                        echo "</td>";
-                        echo "<td>";
+                        echo "<br>";
+                        echo "<b>واحد سازمانی:</b> ";
                         echo $res[$i]->UnitName;
-                        echo "</td>";
-                        echo "<td>";
+                        echo "<br>";
+                        echo "<b>زیر واحد سازمانی:</b> ";
                         echo $res[$i]->SubUnitName;
                         echo "</td>";
                         echo "</tr>";
@@ -107,10 +75,8 @@
     <tr class="FooterOfTable"></tr>
     </table>      
     </form>
-
-
-        </div>
-    <div class="col-2"></div>
 </div>
 </div>
+
+
 

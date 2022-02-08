@@ -5,23 +5,34 @@
     //include "classes\EventTaskPerson.class.php";
     HTMLBegin();
 
+    $ItemsCount = 10;
+    $SearchCond = "";
+    if (isset($_REQUEST["FromRec"]))
+    {
+        if(is_numeric($_REQUEST["FromRec"]))
+            $FromRec = $_REQUEST["FromRec"];
+    }
+    else
+        $FromRec = 0;
+
     if(isset($_REQUEST["title"]))
     {
         $title = $_REQUEST["title"];
         $FromDate = $_REQUEST["FromDate"];
         $ToDate = $_REQUEST["ToDate"];
+        $SearchCond = "title=".$title."&FromDate=".$FromDate."&ToDate=".$ToDate;
         $s = $e = "";
         if($FromDate!="")
         {
             $s=xdate($_REQUEST["FromDate"]);
-            $s= substr($s , 0 , 4)."-".substr($s , 4 , 2)."-".substr($s , 6 ,2);
+            $s= (substr($s , 0 , 4)."-".substr($s , 4 , 2)."-".substr($s , 6 ,2));
         }
         if($ToDate!="")
         {
             $e=xdate($_REQUEST["ToDate"]);
             $e= substr($e , 0 , 4)."-".substr($e , 4 , 2)."-".substr($e , 6 ,2);
         }
-        $res = manage_Event::Search($title , $s , $e);
+        $res = manage_Event::Search($title , $s , $e , $FromRec , $ItemsCount);
 
     }
     else
@@ -30,7 +41,7 @@
         $FromDate = "";
         $ToDate = "";
 
-        $res = manage_Event::GetList();
+        $res = manage_Event::GetList("", $FromRec ,$ItemsCount);
     }
 
     ?>
@@ -164,13 +175,7 @@
         <td colspan="8">
             <?php
 
-                $ItemsCount = 10;
-                $FromRec = 0;
-                if (isset($_REQUEST["FromRec"]))
-                {
-                    if(is_numeric($_REQUEST["FromRec"]))
-                        $FromRec = $_REQUEST["FromRec"];
-                }
+        
 
                 if(isset($_REQUEST["title"]))
                     $TotalCount = manage_Event::GetCountSearch($title, $FromDate, $ToDate);
@@ -180,7 +185,7 @@
                 {
                     if(($p-1) * $ItemsCount != $FromRec)
                     {
-                        echo "<a href = 'ManageEvent.php?FromRec=".(($p-1)*$ItemsCount)."'>";
+                        echo "<a href = 'ManageEvent.php?FromRec=".(($p-1)*$ItemsCount)."&".$SearchCond."'>";
                         echo $p;
                         echo "</a> ";
                     }
@@ -198,8 +203,35 @@
 </div>
 <script>
     function ValidateForm(){
+
+        FromDate = document.getElementById('FromDate').value;
+        ToDate = document.getElementById('ToDate').value;
+
+        if(FromDate != "")
+        {
+            if(!(/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/.test(FromDate)) && !(/^[0-9]{4}[\/](0[1-9]|1[0-2])[\/](0[1-9]|[1-2][0-9]|3[0-1])$/.test(FromDate)))
+            {
+                alert("تاریخ شروع صحیح نیست");
+                return;
+            }
+        }
+
+        if(ToDate != "")
+        {
+            if(!(/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/.test(ToDate)) && !(/^[0-9]{4}[\/](0[1-9]|1[0-2])[\/](0[1-9]|[1-2][0-9]|3[0-1])$/.test(ToDate)))
+            {
+                alert("تاریخ پایان صحیح نیست");
+                return;
+            }
+        }
+
         document.getElementById('f2').submit();
-    }
+	}
+    //document.f2.submit();
+
+
+        
+    
 </script>
 
 

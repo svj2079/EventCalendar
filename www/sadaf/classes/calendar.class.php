@@ -23,7 +23,7 @@ function ShowCalendar($SelectedYear)
     {
         
         $list .= "<td>";
-        $list .= "<table width=100% border=0>";
+        $list .= "<table width=100% border=0 >";
         $list .= "<tr>";
         $list .= "<td colspan=7 align=center class=HeaderOfTable>";
         $list .= GetMonthName($month);
@@ -76,7 +76,7 @@ function ShowCalendar($SelectedYear)
         }
 
     }
-    echo "<table width=98% align=center>";
+    echo "<table width=98% align=center '>";
     echo "<tr>";
     echo "<td width=60%>";
     echo "<table width='500px' align=center border=1 cellspacing=0>";
@@ -84,10 +84,7 @@ function ShowCalendar($SelectedYear)
 
     echo "</table>";
     echo "</td>";
-    echo "<td>";
-    //echo "<span id=TaskInfo name=TaskInfo></span>";
-    echo "<div style='overflow: auto; max-height: 300px; width: 250px; font-size: 11px' id=FixedTaskInfo name=FixedTaskInfo></div>";
-    echo "</td>";
+    
     echo "</tr>";
     echo "</table>";
     echo "<br>";
@@ -173,26 +170,32 @@ function ShowCalendar($SelectedYear)
 function CreateDayCellInCalendar($SelectedYear, $CurYear, $month, $day, $dd, $mm)
 {
     $list = "";
-    
+    $EStyle = "";
     $SelectedDateMiladi = GetMiladiDate($SelectedYear, $month, $day);
+    $SelectedDate2 = substr($SelectedDateMiladi,0,4)."-".substr($SelectedDateMiladi,4,2)."-".substr($SelectedDateMiladi,6,2);
+    
+    if(manage_Event::GetCountSearch('',$SelectedDate2,$SelectedDate2) > 0)
+    {
+        $EStyle = "style= 'border: 2px solid blue;'";
+    }
     
     $link = "<a href='ShowDateEvents.php?CurDate=".$SelectedDateMiladi."'>";
 
     if(IsEndWeekVacation($SelectedDateMiladi))
     {
         if($mm==$month && $dd==$day)
-            $list .= "<td width=3% align=center bgcolor='#7fff00'><b>".$day."</b></td>";
+            $list .= "<td ".$EStyle." width=3% align=center bgcolor='#7fff00'><b>".$day."</b></td>";
         else
-            $list .= "<td width=3% align=center bgcolor=#eeeeee><b>".$day."</b></td>";
+            $list .= "<td ".$EStyle." width=3% align=center bgcolor=#eeeeee><b>".$day."</b></td>";
     }
     else
     {
         $TdStyle = "";
         if($mm==$month && $dd==$day)
-            $list .= "<td width=3% align=center bgcolor='#7fff00' ".$TdStyle.">";
+            $list .= "<td ".$EStyle." width=3% align=center bgcolor='#7fff00' ".$TdStyle.">";
         else {
             
-            $list .= "<td width=3% align=center ".$TdStyle.">".$link;
+            $list .= "<td ".$EStyle." width=3% align=center onmouseover= 'javascript: ShowEvent(".$SelectedDateMiladi.", ".($month%4).", ".round($month/4).")'".$TdStyle.">".$link;
         }
         $IsHodiday = false;
         if($IsHodiday)

@@ -255,31 +255,33 @@
 <script>
 	function ValidateForm()
 	{
+        startDate = document.getElementById('StartDate').value;
+        EndDate = document.getElementById('EndDate').value;
         if(document.getElementById('title').value == "")
         {
             alert("لطفا عنوان را وارد کنید");
             return;
         }
         
-        if(document.getElementById('StartDate').value == "")
+        if(startDate == "")
         {
             alert("لطفا تاریخ شروع را وارد کنید");
             return;
         }
 
-        if(!(/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/.test(document.getElementById('StartDate').value)))
+        if(!(/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/.test(startDate)) && !(/^[0-9]{4}[\/](0[1-9]|1[0-2])[\/](0[1-9]|[1-2][0-9]|3[0-1])$/.test(startDate)))
         {
             alert("تاریخ شروع صحیح نیست");
             return;
         }
 
-        if(document.getElementById('EndDate').value == "")
+        if(EndDate == "")
         {
             alert("لطفا تاریخ پایان را وارد کنید");
             return;
         }
 
-        if(!(/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/.test(document.getElementById('EndDate').value)))
+        if(!(/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/.test(EndDate)) && !(/^[0-9]{4}[\/](0[1-9]|1[0-2])[\/](0[1-9]|[1-2][0-9]|3[0-1])$/.test(EndDate)))
         {
             alert("تاریخ پایان صحیح نیست");
             return;
