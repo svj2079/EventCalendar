@@ -34,7 +34,7 @@
                         echo $res[$i]->title; 
                         echo "<br>";
                         echo "<b>توضیحات:</b> ";
-                        echo $res[$i]->description; 
+                        echo str_replace("\n" , "<br>" , $res[$i]->description) ; 
                         echo "<br>";
                         echo "<b>ساعت شروع:</b> ";
                         echo $res[$i]->ShStartDate;

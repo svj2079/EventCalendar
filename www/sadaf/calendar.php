@@ -34,13 +34,13 @@
 <form id=f2 name=f2 method="Get">
 <table class="table table-sm table-stripped table-bordered " align="center">
 <tr>
-    <td align=right class="col-4">
+    <td align=right>
         <input type="button" class="btn btn-info" onclick="javascript: document.location='calendar.php?SelectedYear=<? echo $PrevYear ?>'" value="قبل" id="before">
     </td>
-    <td align=right class="col-4">
+    <td align=center>
         <? echo "<b>".$SelectedYear."</b>" ?>
     </td>
-    <td align=right class="col-4">
+    <td align=left>
         <input type="button" class="btn btn-info" onclick="javascript: document.location='calendar.php?SelectedYear=<? echo $NextYear ?>'" value="بعد" id="next">
     </td>
 </tr>
@@ -52,13 +52,13 @@
     </td>
 </tr>
 <tr>
-    <td align=right class="col-4">
+    <td align=right>
         <input type="button" class="btn btn-info" onclick="javascript: document.location='calendar.php?SelectedYear=<? echo $PrevYear ?>'" value="قبل" id="before">
     </td>
-    <td align=right class="col-4">
+    <td align=center>
         <? echo "<b>".$SelectedYear."</b>" ?>
     </td>
-    <td align=right class="col-4">
+    <td align=left>
         <input type="button" class="btn btn-info" onclick="javascript: document.location='calendar.php?SelectedYear=<? echo $NextYear ?>'" value="بعد" id="next">
     </td>
 </tr>

@@ -119,8 +119,8 @@
 
 <div class="container-fluid">
 <div class="row">
-<div class="col-2" ></div>
-<div class="col-8" >
+<div class="col-1" ></div>
+<div class="col-10" >
     
     <form id=f2 name=f2 method="Get">
             <?
@@ -148,7 +148,7 @@
                     <b>توضیحات</b>
                 </td>
                 <td nowrap>
-                    <input class="form-control sadaf-m-input" type="text" name="description" id="description" maxlength="45" value="<? echo $description ?>">
+                    <textarea id="description" name="description" rows="5" cols="100"><?php echo $description; ?></textarea>
                 </td>
             </tr>
             <tr>
@@ -248,7 +248,7 @@
     </form>
         
         </div>
-    <div class="col-2"></div>
+    <div class="col-1"></div>
 </div>
 </div>
 

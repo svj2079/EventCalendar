@@ -5,7 +5,10 @@
         public $id;
         public $description;
         public $level;
-        public $NotificationType;
+        public $NotifyByEmail;
+        public $NotifyBySms;
+        public $NotifyByTask;
+
 
         function LoadDataFromDatabase($RecID)
         {
@@ -18,8 +21,10 @@
                 $this->id=$rec["id"];
                 $this->description=$rec["description"];
                 $this->level=$rec["level"];
-                $this->NotificationType=$rec["NotificationType"];
                 $this->EventID=$rec["EventID"];
+                $this->NotifyByEmail=$rec["NotifyByEmail"];
+                $this->NotifyBySms=$rec["NotifyBySms"];
+                $this->NotifyByTask=$rec["NotifyByTask"];
             }
         }
     }
@@ -27,22 +32,22 @@
 
     class manage_EventTasks
     {
-        static function Add($description, $level, $NotificationType , $EventID)
+        static function Add($description, $level, $EventID, $NotifyByEmail, $NotifyBySms, $NotifyByTask)
         {
             $mysql = pdodb::getInstance();
-            $query = "insert into EventCalendar.EventTasks (description, level, NotificationType, EventID) values (?, ?, ?, ?)";
+            $query = "insert into EventCalendar.EventTasks (description, level, EventID, NotifyByEmail, NotifyBySms, NotifyByTask) values (?, ?, ?, ?, ?, ?)";
             $mysql->Prepare($query);
-            $mysql->ExecuteStatement(array($description, $level, $NotificationType, $EventID));
+            $mysql->ExecuteStatement(array($description, $level, $EventID, $NotifyByEmail, $NotifyBySms, $NotifyByTask));
             return true;
 
         }
 
-        static function Update($id, $description, $level, $NotificationType)
+        static function Update($id, $description, $level, $NotifyByEmail, $NotifyBySms, $NotifyByTask)
         {
             $mysql = pdodb::getInstance();
-            $query = "update EventCalendar.EventTasks set description=?, level=?, NotificationType=? where id=?";
+            $query = "update EventCalendar.EventTasks set description=?, level=?, NotifyByEmail=?, NotifyBySms=?, NotifyByTask=? where id=?";
             $mysql->Prepare($query);
-            $mysql->ExecuteStatement(array($description, $level, $NotificationType, $id));
+            $mysql->ExecuteStatement(array($description, $level, $NotifyByEmail, $NotifyBySms, $NotifyByTask, $id));
             return true;
 
         }
@@ -70,7 +75,9 @@
                 $ret[$k]->id=$rec["id"];
                 $ret[$k]->description=$rec["description"];
                 $ret[$k]->level=$rec["level"];
-                $ret[$k]->NotificationType=$rec["NotificationType"];
+                $ret[$k]->NotifyByEmail=$rec["NotifyByEmail"];
+                $ret[$k]->NotifyBySms=$rec["NotifyBySms"];
+                $ret[$k]->NotifyByTask=$rec["NotifyByTask"];
                 $ret[$k]->EventID=$rec["EventID"];
                 $k++;
     

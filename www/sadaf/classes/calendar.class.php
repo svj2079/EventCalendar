@@ -179,7 +179,8 @@ function CreateDayCellInCalendar($SelectedYear, $CurYear, $month, $day, $dd, $mm
         $EStyle = "style= 'border: 2px solid blue;'";
     }
     
-    $link = "<a href='ShowDateEvents.php?CurDate=".$SelectedDateMiladi."'>";
+    //$link = "<a href='ShowDateEvents.php?CurDate=".$SelectedDateMiladi."'>";
+    $link = "<a>";
 
     if(IsEndWeekVacation($SelectedDateMiladi))
     {

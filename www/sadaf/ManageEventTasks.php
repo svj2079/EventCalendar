@@ -4,14 +4,37 @@
     include "classes/EventTypes.class.php";
     include "classes/EventTasks.class.php";
     
-    HTMLBegin(); 
+    HTMLBegin();
+    
+    
+    $NotifyByEmail="NO";
+    $NotifyBySms="NO";
+    $NotifyByTask="NO";
+
+    if(isset($_REQUEST["description"]))
+    {
+        if(isset($_REQUEST["NotifyByEmail"]))
+        {
+            $NotifyByEmail="YES";
+        }
+        if(isset($_REQUEST["NotifyBySms"]))
+        {
+            $NotifyBySms="YES";
+        }
+        if(isset($_REQUEST["NotifyByTask"]))
+        {
+            $NotifyByTask="YES";
+        }
+    }
+
+
     
     if(isset($_REQUEST["description"]))
     {
         if(isset($_REQUEST["id"]))
-            manage_EventTasks::Update($_REQUEST["id"], $_REQUEST["description"], $_REQUEST["level"], $_REQUEST["NotificationType"]);
+            manage_EventTasks::Update($_REQUEST["id"], $_REQUEST["description"], $_REQUEST["level"], $NotifyByEmail, $NotifyBySms, $NotifyByTask);
         else
-            manage_EventTasks::Add($_REQUEST["description"], $_REQUEST["level"], $_REQUEST["NotificationType"] , $_REQUEST["EventID"]);
+            manage_EventTasks::Add($_REQUEST["description"], $_REQUEST["level"], $NotifyByEmail, $NotifyBySms, $NotifyByTask , $_REQUEST["EventID"]);
     }
    
     if(isset($_REQUEST["id"]))
@@ -20,13 +43,17 @@
         $obj->LoadDataFromDatabase($_REQUEST["id"]);
         $description = $obj->description;
         $level = $obj->level;
-        $NotificationType = $obj->NotificationType;
+        $NotifyByEmail = $obj->NotifyByEmail;
+        $NotifyBySms = $obj->NotifyBySms;
+        $NotifyByTask = $obj->NotifyByTask;
     }
     else
     {
         $description = "";
         $level = "";
-        $NotificationType = "";
+        $NotifyByEmail = "";
+        $NotifyBySms = "";
+        $NotifyByTask = "";
     }
 ?>
 
@@ -75,12 +102,12 @@
             <b>نوع اطلاع رسانی</b>
         </td>
         <td nowrap>
-              <select name="NotificationType" id="NotificationType">
-                <option id="NONE">None</option>
-                <option <? if($NotificationType =="EMAIL") echo"selected" ?> value="EMAIL">Email</option>
-                <option <? if($NotificationType =="SMS") echo"selected" ?> value="SMS">SMS</option>
-                <option <? if($NotificationType =="PORTAL") echo"selected" ?> value="PORTAL">Portal</option>
-              </select>
+            <input type="checkbox" id="NotifyBySms" name="NotifyBySms" value="ارسال پیامک" <?php if($NotifyBySms == "YES") echo "checked"; ?>>
+                <label for="NotifyBySms">ارسال پیامک</label><br>
+            <input type="checkbox" id="NotifyByEmail" name="NotifyByEmail" value="ارسال ایمیل" <?php if($NotifyByEmail == "YES") echo "checked"; ?>>
+                <label for="NotifyByEmail">ارسال ایمیل</label><br>
+            <input type="checkbox" id="NotifyByTask" name="NotifyByTask" value="ثبت درخواست کار" <?php if($NotifyByTask == "YES") echo "checked"; ?>>
+                <label for="NotifyByTask">ثبت درخواست کار</label>
         </td>
     </tr>
     <tr class="FooterOfTable">
@@ -105,7 +132,13 @@
             <b>سطح اهمیت</b>
         </td>
         <td>
-            <b>نوع اطلاع رسانی</b>
+            <b>ارسال پیامک</b>
+        </td>
+        <td>
+            <b>ارسال ایمیل</b>
+        </td>
+        <td>
+            <b>ثبت کار</b>
         </td>
         <td>
             <b>مجریان</b>
@@ -126,30 +159,46 @@
             {
                 echo "<tr>";
 
-                echo "<td width='5%'>";
-                echo "<input type=checkbox name='".$CheckBoxId."'>";
-                echo "</td>";
+                    echo "<td width='5%'>";
+                    echo "<input type=checkbox name='".$CheckBoxId."'>";
+                    echo "</td>";
 
-                echo "<td>";
-                echo "<a href='ManageEventTasks.php?id=".$id."&EventID=".$_REQUEST['EventID']."'>";
-                echo $res[$i]->description;
-                echo "</a>";
-                echo "<td>";
-                echo $res[$i]->level;
-                echo "</td><td>";
-                echo $res[$i]->NotificationType;
-                echo "</td>";
-                echo "<td>";
-                echo "<a href='ManageEventTaskPerson.php?EventTaskID=".$id."'>";
-                echo "<i class='fa fa-user' title='مجریان'></i>";
-                echo "</a>";
-                echo "</td>";
+                    echo "<td>";
+                    echo "<a href='ManageEventTasks.php?id=".$id."&EventID=".$_REQUEST['EventID']."'>";
+                    echo $res[$i]->description;
+                    echo "</a>";
+                    echo "</td>";
+
+                    echo "<td>";
+                    echo $res[$i]->level;
+                    echo "</td>";
+                   
+                    echo "<td>";
+                    if($res[$i]->NotifyBySms == "YES") echo "<i class='fa fa-check'></i>";
+                    else echo "<i class='fa fa-times'></i>";
+                    echo "</td>";
+
+                    echo "<td>";
+                    if($res[$i]->NotifyByEmail == "YES") echo "<i class='fa fa-check'></i>";
+                    else echo "<i class='fa fa-times'></i>";
+                    echo "</td>";
+
+                    echo "<td>";
+                    if($res[$i]->NotifyByTask == "YES") echo "<i class='fa fa-check'></i>";
+                    else echo "<i class='fa fa-times'></i>";
+                    echo "</td>";
+
+                    echo "<td>";
+                    echo "<a href='ManageEventTaskPerson.php?EventTaskID=".$id."'>";
+                    echo "<i class='fa fa-user' title='مجریان'></i>";
+                    echo "</a>";
+                    echo "</td>";
                 echo "</tr>";
             }
         }
     ?>
     <tr class="FooterOfTable">
-        <td colspan=6 align="center">
+        <td colspan=8 align="center">
             <input type=button class="btn btn-danger" value="حذف" onclick="if(confirm('آیا مطمئن هستید')) document.f1.submit();">
         </td>
     </tr>
