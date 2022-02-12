@@ -7,10 +7,7 @@
 
     if(isset($_REQUEST["NotifyType"]))
     {
-        if(isset($_REQUEST["EventTaskPersonNotifyID"]))
-            manage_EventTaskPersonNotify::Update($_REQUEST["EventTaskPersonNotifyID"], $_REQUEST["NotifyType"], $_REQUEST["SendDate"]);
-        else
-            manage_EventTaskPersonNotify::Add($_REQUEST["NotifyType"], $_REQUEST["SendDate"]);
+        manage_EventTaskPersonNotify::Add($_REQUEST["NotifyType"], $_REQUEST["PersonID"], $_REQUEST["EventTaskID"]);
     }
 
     if(isset($_REQUEST["EventTaskPersonNotifyID"]))
@@ -19,11 +16,15 @@
         $obj->LoadDataFromDatabase($_REQUEST["EventTaskPersonNotifyID"]);
         $NotifyType = $obj->NotifyType;
         $SendDate = $obj->SendDate;
+        $PersonID = $obj->PersonID;
+        $EventTaskID = $obj->EventTaskID;
     }
     else
     {
         $NotifyType = "";
         $SendDate = "";
+        $PersonID = "";
+        $EventTaskID = "";
     }
 ?>
 
@@ -49,38 +50,29 @@
         if ($res != null)
         for($i=0; $i<count($res); $i++)
         {
-            $id = $res[$i]->id;
-            $CheckBoxId = "ch_".$id;
-            if(isset($_POST[$CheckBoxId]))
-            {
-                manage_EventTasks::Remove($id);
-            }
-            else
-            {
-                echo "<tr>";
+            
+            echo "<tr>";
 
-                    echo "<td width='5%'>";
-                    echo "<input type=checkbox name='".$CheckBoxId."'>";
-                    echo "</td>";
+                echo "<td width='5%'>";
+                echo "<input type=checkbox name='".$CheckBoxId."'>";
+                echo "</td>";
 
-                    echo "<td>";
-                    echo "<a href='ManageEventTaskPersonNotify.php?id=".$id."&EventTaskPersonNotifyID=".$_REQUEST['EventTaskPersonNotifyID']."'>";
-                    echo $res[$i]->NotifyType;
-                    echo "</a>";
-                    echo "</td>";
+                echo "<td>";
+                echo "<a href='ManageEventTaskPersonNotify.php?id=".$id."&EventTaskPersonNotifyID=".$_REQUEST['EventTaskPersonNotifyID']."'>";
+                echo $res[$i]->NotifyType;
+                echo "</a>";
+                echo "</td>";
 
-                    echo "<td>";
-                    echo $res[$i]->SendDate;
-                    echo "</td>";
+                echo "<td>";
+                echo $res[$i]->SendDate;
+                echo "</td>";
 
-                echo "</tr>";
-            }
+            echo "</tr>";
+            
         }
     ?>
     <tr class="FooterOfTable">
-        <td colspan=8 align="center">
-            <input type=button class="btn btn-danger" value="حذف" onclick="if(confirm('آیا مطمئن هستید')) document.f1.submit();">
-        </td>
+        
     </tr>
 </table>
 </form>
