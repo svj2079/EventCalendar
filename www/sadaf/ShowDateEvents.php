@@ -36,10 +36,10 @@
                         echo "<b>توضیحات:</b> ";
                         echo str_replace("\n" , "<br>" , $res[$i]->description) ; 
                         echo "<br>";
-                        echo "<b>ساعت شروع:</b> ";
+                        echo "<b>تاریخ شروع:</b> ";
                         echo $res[$i]->ShStartDate;
                         echo "<br>";
-                        echo "<b>ساعت پایان:</b>";
+                        echo "<b>تاریخ پایان:</b>";
                         echo $res[$i]->ShEndDate;
                         echo "<br>";
                         echo "<b>سطح اهمیت:</b> ";

@@ -157,7 +157,9 @@
                 $res = $mysql->ExecuteStatement(array());
             else
                 $res = $mysql->ExecuteStatement(array($CurDate, $CurDate));
+
             $k = 0;
+            $ret = [];
             while($rec = $res->fetch())
             {
                 $ret[$k] = new be_Event();
@@ -185,7 +187,10 @@
                 $k++;
     
             }
-            return $ret;                
+            if($ret != "")
+                return $ret;
+            else
+                return null;                
         }
 
 

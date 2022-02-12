@@ -32,7 +32,7 @@
 
 
 <form id=f2 name=f2 method="Get">
-<table class="table table-sm table-stripped table-bordered " align="center">
+<table class="table table-sm table-stripped table-bordered " align="center" style="border-color: gray;">
 <tr>
     <td align=right>
         <input type="button" class="btn btn-info" onclick="javascript: document.location='calendar.php?SelectedYear=<? echo $PrevYear ?>'" value="قبل" id="before">
