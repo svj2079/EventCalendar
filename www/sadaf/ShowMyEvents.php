@@ -6,8 +6,6 @@
     include "classes/EventTaskPerson.class.php";
     HTMLBegin();
 
-  
-
 ?>
 
 
