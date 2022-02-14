@@ -66,7 +66,7 @@
         static function GetPersonTasks($PersonID)
         {
             $mysql = pdodb::getInstance();
-            $query = "select EventTaskPerson.EventTaskID, EventTasks.description, NotifyByEmail, NotifyBySms , NotifyByTask, events.description as EventDescription , StartTime, EndTime, events.title as EventTitle
+            $query = "select EventTaskPerson.EventTaskID, EventTasks.description, NotifyByEmail, NotifyBySms , NotifyByTask, events.description as EventDescription , concat(substr(StartTime, 12, 5), '<b>|</b>', g2j(StartTime)) as gStartDate, concat(substr(EndTime , 12, 5), '<b>|</b>' ,g2j(EndTime)) as gEndDate, events.title as EventTitle
              from eventcalendar.events 
             join eventcalendar.EventTasks on (events.id = EventTasks.EventID)
             join eventcalendar.EventTaskPerson on (EventTaskPerson.EventTaskID = EventTasks.id)
@@ -76,72 +76,6 @@
             return $res;   
               
         }
-
-
-
-        static function GetCount()
-        {
-            $mysql = pdodb::getInstance();
-            $query = "select count(*) as tcount from EventCalendar.EventTasks";
-            $mysql->Prepare($query);
-            $res = $mysql->ExecuteStatement(array($query));
-            $rec = $res->fetch();
-            return $rec["tcount"];
-        }
-
-
-
-        static function GetCountSearch($FromDate , $ToDate)
-        {
-            $condArray = array();
-            $mysql = pdodb::getInstance();
-            $query = "select count(*) as tcount from EventCalendar.EventTasks where FromDate like ? ";
-            if ($FromDate != "")
-            {
-             $query .= " and StartTime<=? ";
-             array_push($condArray, $FromDate);
-            }
-            if ($ToDate != "")
-            {
-             $query .= " and EndTime>=?";
-             array_push($condArray, $ToDate);
-            }
-            $mysql->Prepare($query);
-            $res = $mysql->ExecuteStatement($condArray);
-            //echo $query;
-            //echo "<br>".$FromDate."<br>".$ToDate;
-            $rec = $res->fetch();
-            return $rec["tcount"];
-        }
-
-
-
-        static function Search($FromDate , $ToDate, $FromRec = 0, $ItemsCount = 10)
-        {
-            if(! is_numeric($FromRec) || ! is_numeric($ItemsCount))
-                return;
-            $condArray = array();
-            $mysql = pdodb::getInstance();
-            $query = "select *,sadaf.g2j(StartTime) as ShStartDate, sadaf.g2j(EndTime) as ShEndDate from EventCalendar.events where title like ? ";
-            if ($FromDate != "")
-            {
-             $query .= " and StartTime<=? ";
-             array_push($condArray, $FromDate);
-            }
-            if ($ToDate != "")
-            {
-             $query .= " and EndTime>=?";
-             array_push($condArray, $ToDate);
-            }
-            $query .= " limit ".$FromRec.",".$ItemsCount;
-            $mysql->Prepare($query);
-            
-            
-            $res = $mysql->ExecuteStatement($condArray);
-            return $res;
-
-        }
-
 
 
         static function GetList($EventID)
