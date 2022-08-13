@@ -148,7 +148,7 @@
                     <b>توضیحات</b>
                 </td>
                 <td nowrap>
-                    <textarea id="description" name="description" rows="5" cols="100"><?php echo $description; ?></textarea>
+                    <textarea id="description" name="description" rows="5" cols="80"><?php echo $description; ?></textarea>
                 </td>
             </tr>
             <tr>

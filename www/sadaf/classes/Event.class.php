@@ -99,12 +99,12 @@
             $query = "select *,sadaf.g2j(StartTime) as ShStartDate, sadaf.g2j(EndTime) as ShEndDate from EventCalendar.events where title like ? ";
             if ($FromDate != "")
             {
-             $query .= " and StartTime<=? ";
+             $query .= " and StartTime>=? ";
              array_push($condArray, $FromDate);
             }
             if ($ToDate != "")
             {
-             $query .= " and EndTime>=?";
+             $query .= " and StartTime<=?";
              array_push($condArray, $ToDate);
             }
             $query .= " limit ".$FromRec.",".$ItemsCount;

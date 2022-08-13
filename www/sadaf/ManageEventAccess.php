@@ -78,12 +78,15 @@
     <tr class="FooterOfTable">
     <td align="center" colspan="2">
         <input type="button" class="btn btn-info" onclick="javascript: ValidateForm();" value="ذخیره">
-        <input type="button" class="btn " onclick="javascript: document.location='ManageEventAccess.php';" value="جدید">
+        <input type="button" class="btn " onclick="javascript: document.location='ManageEventAccess.php?EventID=<? echo $_REQUEST['EventID']?>';" value="جدید">
     </td>
     </tr>
     </table>
 </form>
-
+<?
+// in line 81: 
+//         <input type="button" class="btn " onclick="javascript: document.location='ManageEventAccess.php';" value="جدید">
+?>
 
 <form id=f1 name=f1 method=post>
 <input type=hidden id=EventID name=EventID value='<? echo $EventID?>'>
@@ -117,7 +120,9 @@
                 echo "</td>";
 
                 echo "<td>";
+                //echo "<a href='ManageEventAccess.php?id=".$id."'>";
                 echo $res[$i]->FullName;
+                //echo "</a>";
                 echo "</td>";
                 echo "<td>";
                 //echo "<a href='ManageEventAccess.php?id=".$id."&EventID=".$_REQUEST['EventID']."'>";

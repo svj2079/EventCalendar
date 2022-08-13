@@ -115,7 +115,7 @@
                 $ret[$k]->id=$rec["id"];
                 $ret[$k]->PersonID=$rec["PersonID"];
                 $ret[$k]->AccessType=$rec["AccessType"];
-                $ret[$k]->EventID=$ret["EventID"];
+                //$ret[$k]->EventID=$ret["EventID"];
                 $ret[$k]->FullName=$rec["FullName"];
                 $k++;
     
