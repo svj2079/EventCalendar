@@ -25,6 +25,7 @@
                 $this->NotifyByEmail=$rec["NotifyByEmail"];
                 $this->NotifyBySms=$rec["NotifyBySms"];
                 $this->NotifyByTask=$rec["NotifyByTask"];
+                //
             }
         }
     }
