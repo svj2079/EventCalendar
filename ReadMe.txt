@@ -1,3 +1,5 @@
+C:\wamp64\bin\mariadb\mariadb10.4.10\bin>     mysqldump.exe -uroot -p eventcalendar > c:\wamp64\www\EventCalendar\www\EventCalendar.sql
+
 project: EventCalendar
 URL: http://localhost/EventCalendar/www/sadaf/login.php
 

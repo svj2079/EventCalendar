@@ -62,6 +62,22 @@
 
         }
 
+
+        static function GetPersonTasks($PersonID)
+        {
+            $mysql = pdodb::getInstance();
+            $query = "select EventTaskPerson.EventTaskID, EventTasks.description, NotifyByEmail, NotifyBySms , NotifyByTask, events.description as EventDescription , concat(substr(StartTime, 12, 5), '<b>|</b>', g2j(StartTime)) as gStartDate, concat(substr(EndTime , 12, 5), '<b>|</b>' ,g2j(EndTime)) as gEndDate, events.title as EventTitle
+             from eventcalendar.events 
+            join eventcalendar.EventTasks on (events.id = EventTasks.EventID)
+            join eventcalendar.EventTaskPerson on (EventTaskPerson.EventTaskID = EventTasks.id)
+            where EventTaskPerson.PersonID= ? and StartTime between now() and ADDDATE(now(), interval 7 DAY)";
+            $mysql->Prepare($query);
+            $res = $mysql->ExecuteStatement(array($PersonID));
+            return $res;   
+              
+        }
+
+
         static function GetList($EventID)
         {
             $mysql = pdodb::getInstance();
@@ -71,7 +87,7 @@
             $k = 0;
             while($rec = $res->fetch())
             {
-                $ret[$k] = new be_EventType();
+                $ret[$k] = new be_EventTask();
                 $ret[$k]->id=$rec["id"];
                 $ret[$k]->description=$rec["description"];
                 $ret[$k]->level=$rec["level"];

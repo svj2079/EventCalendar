@@ -173,7 +173,7 @@
                     <b>ساعت شروع</b>
                 </td>
                 <td nowrap>
-                    <input class="" type="text" name="StartHour" id="StartHour" size="2" maxlength="2" value="<? echo $StartHour ?>">:<input class="" type="text" name="StartMinute" id="StartMinute" size="2" maxlength="2" value="<? echo $StartMinute ?>">
+                    <input type="text" name="StartHour" id="StartHour" size="2" maxlength="2" value="<? echo $StartHour ?>">:<input type="text" name="StartMinute" id="StartMinute" size="2" maxlength="2" value="<? echo $StartMinute ?>">
                 </td>
             </tr>
             <tr>

@@ -34,7 +34,7 @@
         if(isset($_REQUEST["id"]))
             manage_EventTasks::Update($_REQUEST["id"], $_REQUEST["description"], $_REQUEST["level"], $NotifyByEmail, $NotifyBySms, $NotifyByTask);
         else
-            manage_EventTasks::Add($_REQUEST["description"], $_REQUEST["level"], $NotifyByEmail, $NotifyBySms, $NotifyByTask , $_REQUEST["EventID"]);
+            manage_EventTasks::Add($_REQUEST["description"], $_REQUEST["level"], $_REQUEST["EventID"], $NotifyByEmail, $NotifyBySms, $NotifyByTask );
     }
    
     if(isset($_REQUEST["id"]))
@@ -143,6 +143,9 @@
         <td>
             <b>مجریان</b>
         </td>
+        <td>
+            <b>سابقه</b>
+        </td>
     </thead>
     <?
         $res = manage_EventTasks::GetList($_REQUEST["EventID"]);
@@ -193,6 +196,13 @@
                     echo "<i class='fa fa-user' title='مجریان'></i>";
                     echo "</a>";
                     echo "</td>";
+
+                    echo "<td>";
+                    echo "<a href='EventNotificationHistory.php?EventTaskID=".$id."'>";
+                    echo "<i class='fa fa-tasks' title='سابقه'></i>";
+                    echo "</a>";
+                    echo "</td>";
+
                 echo "</tr>";
             }
         }

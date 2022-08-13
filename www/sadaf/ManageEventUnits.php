@@ -26,10 +26,7 @@
 
     if(isset($_REQUEST["UnitID"]))
     {
-        if(isset($_REQUEST["id"]))
-            manage_EventUnits::Update($_REQUEST["id"], $_REQUEST["EventID"], $_REQUEST["UnitID"], $_REQUEST["SubUnitID"]);
-        else
-            manage_EventUnits::Add($_REQUEST["EventID"], $_REQUEST["UnitID"], $_REQUEST["SubUnitID"]);
+        manage_EventUnits::Add($_REQUEST["EventID"], $_REQUEST["UnitID"], $_REQUEST["SubUnitID"]);
     }
     if(isset($_REQUEST["id"]))
     {
